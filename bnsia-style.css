@@ -1,0 +1,77 @@
+/*  This file is part of BNS Inline Asides.
+
+    Copyright 2011  Edward Caissie  (email : edward.caissie@gmail.com)
+
+    BNS Inline Asides is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License, version 2, as
+    published by the Free Software Foundation.
+
+    BNS Inline Asides is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*/
+
+span.close-aside, span.open-aside {
+  border-bottom: thin solid black;
+  cursor: help;  
+  display: block;
+  text-align: right;
+}
+
+.aside-toggler.closed .close-aside,
+.aside-toggler.open .open-aside,
+blockquote.aside.closed,
+p.aside.closed,
+span.aside.closed {
+  display:none;
+}
+
+blockquote.aside { background-image: none; }
+
+/* Pre-Defined Aside Types */
+/* Type: Note */
+.open-aside.note { background-color: #c0c0c0;}
+blockquote.aside.note,
+p.aside.note,
+span.aside.note { background-color: #c0c0c0; /* Default text color on Light Grey background - Sample Only */ }
+
+/* Type: Rant */
+.open-aside.rant { background-color: #ff0000; color: #000; }
+blockquote.aside.rant,
+p.aside.rant,
+span.aside.rant { /* Black text on a red background with a non-repeating flame graphic for added emphasis - Sample Only */
+	background: #ff0000 url('flame.png') no-repeat left;
+	color: #000;
+}
+
+/* Custom Aside Types */
+/**
+  * To add your own custom aside type styles you might consider creating a new
+  * stylesheet in this plugin's folder using the name: bnsia-custom-types.css
+  *   
+  * Simply follow the "Sample" element formats above for simple styles.
+  * The plugin will create a class name from the custom aside type you use in 
+  * your shortcode. For example, [aside type="bacon"] will generate these
+  * classes can style:
+  *   .open-aside.bacon
+  *   .close-aside.bacon
+  *   blockquote.aside.bacon
+  *   p.aside.bacon       
+  *   span.aside.bacon
+  *
+  * This method can also be used to over-write the Pre-Defined Aside Types 
+  * styles as the bnsia-custom-types.css file loads after the main stylesheet.
+  *                     
+  * The bnsia-custom-types.css stylesheet should not be over-written by updates.        
+  * 
+  * Enjoy!
+  *   
+  * 
+  * Edward Caissie 
+  * Cais | edward.caissie@gmail.com  
+  */            
