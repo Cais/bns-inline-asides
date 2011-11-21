@@ -123,6 +123,7 @@ Please stay current with your WordPress installation, your active theme, and you
 * confirmed compatible with WordPress version 3.3
 * added PHPDoc style documentation
 * added `BNS Inline Asides TextDomain` i18n support
+* added `BNS Theme Element` to set CSS element to be used
 * added `bnsia` class (to be used as default)
 * removed `is_admin` check from enqueue action function (not needed)
 * removed 'span' support; going forward with block display elements only

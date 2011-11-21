@@ -136,14 +136,23 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
         }
 
         /**
-         * Plugin currently supports <blockquote>, <p> and <span>.
-         * @var $bnsia_theme_element string - plugin would leverage theme style associated with CSS block element used
+         * BNSIA Theme Element
          *
-         * @todo Add option page to choose which theme element to use, currently manual edits are required to change.
+         * Plugin currently supports <blockquote> and <p> block elements, or the default <div class = bnsia>
+         *
+         * @package BNS_Inline_Asides
+         * @since 0.6
+         * @internal manual edit is required to change
+         *
+         * @return string
+         *
+         * @todo Add option page to choose which theme element, if any, to use
          */
-        $bnsia_theme_element = '';
-        // $bnsia_theme_element = 'blockquote';
-        // $bnsia_theme_element = 'p';
+        function bnsia_theme_element() {
+            return '';
+            // return 'blockquote';
+            // return 'p';
+        }
 
         // The secret sauce ...
         /** @var $show string - used as boolean control */
@@ -152,10 +161,10 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
                          . '<span class="open-aside' . $type_class . '">' . sprintf( __( $show ), esc_attr( $type ) ) . '</span>'
                          . '<span class="close-aside' . $type_class . '">' . sprintf( __( $hide ), esc_attr( $type ) ) . '</span>
                          </div>';
-        if ( $bnsia_theme_element == '' ) {
+        if ( bnsia_theme_element() == '' ) {
             $return = $toggle_markup . '<div class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</div>';
         } else {
-            $return = $toggle_markup . '<' . $bnsia_theme_element . ' class="aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . $bnsia_theme_element . '>';
+            $return = $toggle_markup . '<' . bnsia_theme_element() . ' class="aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . bnsia_theme_element() . '>';
         }
 
         static $script_output;
