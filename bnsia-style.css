@@ -31,26 +31,31 @@ span.close-aside, span.open-aside {
 
 .aside-toggler.closed .close-aside,
 .aside-toggler.open .open-aside,
+.bnsia.aside.closed,
 blockquote.aside.closed,
-p.aside.closed,
-span.aside.closed {
+p.aside.closed {
   display:none;
 }
 
+/** Default - no CSS element chosen */
+.bnsia.aside { padding: 10px; }
+
+/** Remove any background image from blockquote if it exists */
 blockquote.aside { background-image: none; }
 
 /** Pre-Defined BNS Inline Aside Types */
 /** Type: Note */
 .open-aside.note { background-color: #c0c0c0;}
+.bnsia.aside.note,
 blockquote.aside.note,
-p.aside.note,
-span.aside.note { background-color: #c0c0c0; /* Default text color on Light Grey background - Sample Only */ }
+p.aside.note { /* Default text color on Light Grey background - Sample Only */
+    background-color: #c0c0c0; }
 
 /** Type: Rant */
 .open-aside.rant { background-color: #ff0000; color: #000; }
+.bnsia.aside.rant,
 blockquote.aside.rant,
-p.aside.rant,
-span.aside.rant { /* Black text on a red background with a non-repeating flame graphic for added emphasis - Sample Only */
+p.aside.rant { /* Black text on a red background with a non-repeating flame graphic for added emphasis - Sample Only */
 	background: #ff0000 url('flame.png') no-repeat left;
 	color: #000;
 }
@@ -65,11 +70,11 @@ span.aside.rant { /* Black text on a red background with a non-repeating flame g
  * shortcode.
  * For example: [aside type="bacon"] will generate CSS classes similar to these:
  *
- *   .open-aside.bacon
- *   .close-aside.bacon
- *   blockquote.aside.bacon
- *   p.aside.bacon
- *   span.aside.bacon
+ *  .open-aside.bacon
+ *  .close-aside.bacon
+ *  .bnsia.aside.bacon
+ *  blockquote.aside.bacon
+ *  p.aside.bacon
  *
  * NB: Make sure to use the correct prefix, the default is: blockquote.
  *

@@ -62,9 +62,9 @@ The plugin will create a class name from the custom aside type you use in your s
 
 * .open-aside.bacon
 * .close-aside.bacon
+* .bnsia.aside.bacon
 * blockquote.aside.bacon
 * p.aside.bacon
-* span.aside.bacon
 
 This method can also be used to over-write the Pre-Defined Aside Types styles as the bnsia-custom-types.css file loads after the main stylesheet.
 
@@ -123,7 +123,9 @@ Please stay current with your WordPress installation, your active theme, and you
 * confirmed compatible with WordPress version 3.3
 * added PHPDoc style documentation
 * added `BNS Inline Asides TextDomain` i18n support
+* added `bnsia` class (to be used as default)
 * removed `is_admin` check from enqueue action function (not needed)
+* removed 'span' support; going forward with block display elements only
 
 = 0.5 =
 * released June 2011
