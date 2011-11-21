@@ -123,6 +123,7 @@ Please stay current with your WordPress installation, your active theme, and you
 * confirmed compatible with WordPress version 3.3
 * added PHPDoc style documentation
 * removed `is_admin` check from enqueue action function (not needed)
+* added `BNS Inline Asides TextDomain` i18n support
 
 = 0.5 =
 * released June 2011

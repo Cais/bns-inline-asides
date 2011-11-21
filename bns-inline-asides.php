@@ -51,14 +51,36 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
 
-// WordPress Version testing ...
+/**
+ * Check installed WordPress version for compatibility
+ *
+ * @package     BNS_Inline_Asides
+ * @since       1.0
+ * @internal    Version 3.0 being used in reference to home_url()
+ *
+ * Last revised November 18, 2011.
+ * @todo Re-write to be i18n compatible
+ */
 global $wp_version;
 $exit_ver_msg = 'BNS Inline Asides requires a minimum of WordPress 3.0, <a href="http://codex.wordpress.org/Upgrading_WordPress">Please Update!</a>';
 if ( version_compare( $wp_version, "3.0", "<" ) ) { // per home_url() function
     exit ( $exit_ver_msg );
 }
 
-// Define some constants to save some keying
+/**
+ * BNS Inline Asides TextDomain
+ * Make plugin text available for translation (i18n)
+ *
+ * @package:    BNS_Inline_Asides
+ * @since:      0.6
+ *
+ * @internal    Note: Translation files are expected to be found in the plugin root folder / directory.
+ * @internal    `bns-ia` is being used in place of `bns-inline-asides`
+ */
+load_plugin_textdomain( 'bns-ia' );
+// End: BNS Inline Asides TextDomain
+
+/** Define some constants to save some keying */
 define( 'BNSIA_URL', plugin_dir_url( __FILE__ ) );
 define( 'BNSIA_PATH', plugin_dir_path( __FILE__ ) );
 
@@ -131,10 +153,10 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
         if ( ! isset( $script_output ) ) {
             $return .= '<script type="text/javascript">
             /* <![CDATA[ */
-            jQuery(document).ready(function() {
-                jQuery(".aside-toggler").click(function(){
-                    jQuery(this).toggleClass("open").toggleClass("closed").next("' . $bnsia_theme_element . '.aside").slideToggle("slow",function(){
-                    jQuery(this).toggleClass("open").toggleClass("closed");
+            jQuery( document ).ready( function(){
+                jQuery( ".aside-toggler" ).click( function(){
+                    jQuery( this ).toggleClass( "open" ).toggleClass( "closed" ).next( "' . $bnsia_theme_element . '.aside" ).slideToggle( "slow", function(){
+                        jQuery( this ).toggleClass( "open" ).toggleClass( "closed" );
                     });
                 });
             });
