@@ -58,14 +58,16 @@ span.aside.rant { /* Black text on a red background with a non-repeating flame g
  *
  * Simply follow the "Sample" element formats above for simple styles. The
  * plugin will create a class name from the custom aside type you use in your
- * shortcode. For example, [aside type="bacon"] will generate these classes can
- * style:
+ * shortcode.
+ * For example: [aside type="bacon"] will generate CSS classes similar to these:
  *
  *   .open-aside.bacon
  *   .close-aside.bacon
  *   blockquote.aside.bacon
  *   p.aside.bacon
  *   span.aside.bacon
+ *
+ * NB: Make sure to use the correct prefix, the default is: blockquote.
  *
  * This method can also be used to over-write the Pre-Defined Aside Types styles
  * as the bnsia-custom-types.css file loads after the main stylesheet.

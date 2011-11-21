@@ -58,7 +58,6 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @since       1.0
  * @internal    Version 3.0 being used in reference to home_url()
  *
- * Last revised November 18, 2011.
  * @todo Re-write to be i18n compatible
  */
 global $wp_version;
@@ -84,7 +83,14 @@ load_plugin_textdomain( 'bns-ia' );
 define( 'BNSIA_URL', plugin_dir_url( __FILE__ ) );
 define( 'BNSIA_PATH', plugin_dir_path( __FILE__ ) );
 
-// Add BNS Inline Asides scripts
+/**
+ * Enqueue Plugin Scripts and Styles
+ *
+ * Adds plugin stylesheet and allows for custom stylesheet to be added by end-user.
+ *
+ * @package BNS_Inline_Asides
+ * @since   0.4.1
+ */
 function BNSIA_Scripts_and_Styles() {
         /* Enqueue Scripts */
 		wp_enqueue_script( 'jquery' );
@@ -111,20 +117,20 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
                                  ), $atts )
         );
 
-        // clean up shortcode properties
-        /** @var $status string */
+        /** clean up shortcode properties */
+        /** @var $status string - used as toggle switch */
         $status = esc_attr( strtolower( $status ) );
         if ( $status != "open" )
             $status = "closed";
 
-        // ... also leave any end-user capitalization for aesthetics
-        /** @var $type string */
+        /** @var $type_class string ... leave any end-user capitalization for aesthetics */
+        /** @var $type Aside|defined by end-user */
         $type_class = esc_attr( strtolower( $type ) );
 
-        // ... replace space(s) with a hyphen to create nice CSS classes
+        /** replace space(s) with a hyphen to create nice CSS classes */
         $type_class = preg_replace( '/\s\s+/', '-', $type_class );
 
-        // no need to duplicate the default 'aside' class
+        /** no need to duplicate the default 'aside' class */
         if ( $type_class == 'aside' ) {
             $type_class = '';
         } else {
@@ -167,6 +173,10 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
         return $return;
 }
 
-// We're done ... let's wrap this up into a simple shortcode!
+/** We're done ... let's wrap this up into a simple shortcode!
+ * @example [aside type="Aside" status="open" show="To see the <em>%s</em> click here." hide="To hide the <em>%s</em> click here."]The aside text.[/aside]
+ *
+ * @todo Review for potential conflict with WordPress default post-format 'aside'
+ */
 add_shortcode( 'aside', 'bns_inline_asides_shortcode' );
 ?>
