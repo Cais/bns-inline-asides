@@ -10,8 +10,6 @@ License: GNU General Public License v2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 */
 
-/* Last revision: June 4, 2011 v0.5.1 */
-
 /**
  * BNS Inline Asides
  *
@@ -46,7 +44,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * The license for this software can also likely be found here:
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
- * Last revised November 18, 2011
+ * Last revised November 21, 2011
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
@@ -55,7 +53,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Check installed WordPress version for compatibility
  *
  * @package     BNS_Inline_Asides
- * @since       1.0
+ * @since       0.1
  * @internal    Version 3.0 being used in reference to home_url()
  *
  * @todo Re-write to be i18n compatible
