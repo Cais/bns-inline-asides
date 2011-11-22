@@ -4,6 +4,7 @@ Plugin Name: BNS Inline Asides
 Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
 Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
 Version: 0.6
+Text Domain: bns-ia
 Author: Edward Caissie
 Author URI: http://edwardcaissie.com/
 License: GNU General Public License v2
@@ -50,6 +51,19 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
 
 /**
+ * BNS Inline Asides TextDomain
+ * Make plugin text available for translation (i18n)
+ *
+ * @package:    BNS_Inline_Asides
+ * @since:      0.6
+ *
+ * @internal    Note: Translation files are expected to be found in the plugin root folder / directory.
+ * @internal    `bns-ia` is being used in place of `bns-inline-asides`
+ */
+load_plugin_textdomain( 'bns-ia' );
+// End: BNS Inline Asides TextDomain
+
+/**
  * Check installed WordPress version for compatibility
  *
  * @package     BNS_Inline_Asides
@@ -65,19 +79,6 @@ $exit_ver_msg = __( 'BNS Inline Asides requires a minimum of WordPress 3.0, <a h
 if ( version_compare( $wp_version, "3.0", "<" ) ) { // per home_url() function
     exit ( $exit_ver_msg );
 }
-
-/**
- * BNS Inline Asides TextDomain
- * Make plugin text available for translation (i18n)
- *
- * @package:    BNS_Inline_Asides
- * @since:      0.6
- *
- * @internal    Note: Translation files are expected to be found in the plugin root folder / directory.
- * @internal    `bns-ia` is being used in place of `bns-inline-asides`
- */
-load_plugin_textdomain( 'bns-ia' );
-// End: BNS Inline Asides TextDomain
 
 /** Define some constants to save some keying */
 define( 'BNSIA_URL', plugin_dir_url( __FILE__ ) );
