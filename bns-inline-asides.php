@@ -45,7 +45,9 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * The license for this software can also likely be found here:
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
- * Last revised November 21, 2011
+ * Last revised November 22, 2011
+ * @todo Add type=changelog
+ * @todo Add type=Nota Bene -or- NB
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
