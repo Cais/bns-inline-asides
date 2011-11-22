@@ -126,7 +126,10 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
         if ( $status != "open" )
             $status = "closed";
 
-        /** @var $type_class string - leaves any end-user capitalization for aesthetics */
+        /**
+         * @var $type_class string - leaves any end-user capitalization for aesthetics
+         * @todo Find a cleaner way to modify the $text_class variable
+         */
         /** @var $type string - default: Aside; or defined by end-user */
         $type_class = esc_attr( strtolower( $type ) );
         /** replace whitespace with a single space */
