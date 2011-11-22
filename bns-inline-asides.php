@@ -56,10 +56,12 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @since       0.1
  * @internal    Version 3.0 being used in reference to home_url()
  *
- * @todo Re-write to be i18n compatible
+ * @version     0.6
+ * Last revised November 21, 2011
+ * Re-write to be i18n compatible
  */
 global $wp_version;
-$exit_ver_msg = 'BNS Inline Asides requires a minimum of WordPress 3.0, <a href="http://codex.wordpress.org/Upgrading_WordPress">Please Update!</a>';
+$exit_ver_msg = __( 'BNS Inline Asides requires a minimum of WordPress 3.0, <a href="http://codex.wordpress.org/Upgrading_WordPress">Please Update!</a>', 'bns-ia' );
 if ( version_compare( $wp_version, "3.0", "<" ) ) { // per home_url() function
     exit ( $exit_ver_msg );
 }
@@ -173,7 +175,7 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
             /* <![CDATA[ */
             jQuery( document ).ready( function(){
                 jQuery( ".aside-toggler" ).click( function(){
-                    jQuery( this ).toggleClass( "open" ).toggleClass( "closed" ).next( "' . $bnsia_theme_element . '.aside" ).slideToggle( "slow", function(){
+                    jQuery( this ).toggleClass( "open" ).toggleClass( "closed" ).next( "' . bnsia_theme_element() . '.aside" ).slideToggle( "slow", function(){
                         jQuery( this ).toggleClass( "open" ).toggleClass( "closed" );
                     });
                 });
@@ -185,7 +187,8 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
         return $return;
 }
 
-/** We're done ... let's wrap this up into a simple shortcode!
+/**
+ * We're done ... let's wrap this up into a simple shortcode!
  * @example [aside type="Aside" status="open" show="To see the <em>%s</em> click here." hide="To hide the <em>%s</em> click here."]The aside text.[/aside]
  *
  * @todo Review for potential conflict with WordPress default post-format 'aside'
