@@ -130,8 +130,9 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
         /** @var $type Aside|defined by end-user */
         $type_class = esc_attr( strtolower( $type ) );
 
-        /** replace space(s) with a hyphen to create nice CSS classes */
-        $type_class = preg_replace( '/\s\s+/', '-', $type_class );
+        /** replace whitespace with a single space then replace space with a hyphen to create nice CSS classes */
+        $type_class = preg_replace( '/\s\s+/', ' ', $type_class );
+        $type_class = preg_replace( '/\\040/', '-', $type_class );
 
         /** no need to duplicate the default 'aside' class */
         if ( $type_class == 'aside' ) {
