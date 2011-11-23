@@ -155,12 +155,19 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
          *
          * @return string
          *
+         * @version 0.6.1
+         * Last revised November 22, 2011
+         * Corrected issue with conditional - Fatal error: Cannot redeclare bnsia_theme_element()
+         *
          * @todo Add option page to choose which theme element, if any, to use
          */
-        function bnsia_theme_element() {
-            return '';
-            // return 'blockquote';
-            // return 'p';
+
+        if ( ! function_exists( 'bnsia_theme_element' ) ) {
+            function bnsia_theme_element() {
+                    return '';
+                    // return 'blockquote';
+                    // return 'p';
+            }
         }
 
         // The secret sauce ...

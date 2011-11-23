@@ -4,7 +4,7 @@ Donate link: http://buynowshop.com
 Tags: posts, pages, content, shortcode
 Requires at least: 3.0
 Tested up to: 3.3
-Stable tag: 0.6
+Stable tag: 0.6.1
 
 This plugin will allow you to style sections of the post, or page, content with added emphasis by leveraging a style element from the active theme.
 
@@ -119,7 +119,7 @@ Please stay current with your WordPress installation, your active theme, and you
 
 == Changelog ==
 = 0.6 =
-* released ...
+* released November 2011
 * confirmed compatible with WordPress version 3.3
 * added PHPDoc style documentation
 * added `BNS Inline Asides TextDomain` i18n support
