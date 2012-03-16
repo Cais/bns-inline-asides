@@ -177,7 +177,7 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
                          . '<span class="open-aside' . $type_class . '">' . sprintf( __( $show, 'bns-ia' ), esc_attr( $type ) ) . '</span>'
                          . '<span class="close-aside' . $type_class . '">' . sprintf( __( $hide, 'bns-ia' ), esc_attr( $type ) ) . '</span>'
                          . '</div>';
-        if ( '' == bnsia_theme_element() ) {
+        if ( bnsia_theme_element() == '' ) {
             $return = $toggle_markup . '<div class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</div>';
         } else {
             $return = $toggle_markup . '<' . bnsia_theme_element() . ' class="aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . bnsia_theme_element() . '>';
@@ -208,4 +208,3 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
  * @todo Review for potential conflict with WordPress default post-format 'aside'
  */
 add_shortcode( 'aside', 'bns_inline_asides_shortcode' );
-?>
