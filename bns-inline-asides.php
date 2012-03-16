@@ -175,9 +175,9 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
         /** @var $hide string - used as boolean control */
         $toggle_markup = '<div class="bnsia-aside-toggler ' . $status . '">'
                          . '<span class="open-aside' . $type_class . '">' . sprintf( __( $show, 'bns-ia' ), esc_attr( $type ) ) . '</span>'
-                         . '<span class="close-aside' . $type_class . '">' . sprintf( __( $hide, 'bns-ia' ), esc_attr( $type ) ) . '</span>
-                         </div>';
-        if ( bnsia_theme_element() == '' ) {
+                         . '<span class="close-aside' . $type_class . '">' . sprintf( __( $hide, 'bns-ia' ), esc_attr( $type ) ) . '</span>'
+                         . '</div>';
+        if ( '' == bnsia_theme_element() ) {
             $return = $toggle_markup . '<div class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</div>';
         } else {
             $return = $toggle_markup . '<' . bnsia_theme_element() . ' class="aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . bnsia_theme_element() . '>';
