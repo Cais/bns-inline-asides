@@ -3,7 +3,7 @@
 Plugin Name: BNS Inline Asides
 Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
 Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
-Version: 0.6.1
+Version: 0.6.2
 Text Domain: bns-ia
 Author: Edward Caissie
 Author URI: http://edwardcaissie.com/
@@ -21,9 +21,9 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @link        http://buynowshop.com/plugins/bns-inline-asides/
  * @link        https://github.com/Cais/bns-inline-asides/
  * @link        http://wordpress.org/extend/plugins/bns-inline-asides/
- * @version     0.6.1
+ * @version     0.6.2
  * @author      Edward Caissie <edward.caissie@gmail.com>
- * @copyright   Copyright (c) 2011, Edward Caissie
+ * @copyright   Copyright (c) 2011-2012, Edward Caissie
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License version 2, as published by the
@@ -45,7 +45,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * The license for this software can also likely be found here:
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
- * Last revised November 22, 2011
+ * Last revised March 16, 2012
  * @todo Add type=changelog
  * @todo Add type=Nota Bene -or- NB
  */
@@ -173,7 +173,7 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
         // The secret sauce ...
         /** @var $show string - used as boolean control */
         /** @var $hide string - used as boolean control */
-        $toggle_markup = '<div class="aside-toggler ' . $status . '">'
+        $toggle_markup = '<div class="bnsia-aside-toggler ' . $status . '">'
                          . '<span class="open-aside' . $type_class . '">' . sprintf( __( $show ), esc_attr( $type ) ) . '</span>'
                          . '<span class="close-aside' . $type_class . '">' . sprintf( __( $hide ), esc_attr( $type ) ) . '</span>
                          </div>';
@@ -188,7 +188,7 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
             $return .= '<script type="text/javascript">
             /* <![CDATA[ */
             jQuery( document ).ready( function(){
-                jQuery( ".aside-toggler" ).click( function(){
+                jQuery( ".bnsia-aside-toggler" ).click( function(){
                     jQuery( this ).toggleClass( "open" ).toggleClass( "closed" ).next( "' . bnsia_theme_element() . '.aside" ).slideToggle( "slow", function(){
                         jQuery( this ).toggleClass( "open" ).toggleClass( "closed" );
                     });

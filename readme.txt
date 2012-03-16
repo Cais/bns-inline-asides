@@ -118,6 +118,9 @@ Sample content taken from the "Readability" post of the Theme Unit Test data fou
 Please stay current with your WordPress installation, your active theme, and your plugins.
 
 == Changelog ==
+= 0.6.2 =
+* Added 'bnsia-' to 'aside-toggler' class for better namespacing
+
 = 0.6 =
 * released November 2011
 * confirmed compatible with WordPress version 3.3

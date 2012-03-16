@@ -1,6 +1,6 @@
 /*  This file is part of BNS Inline Asides.
 
-    Copyright 2011  Edward Caissie  (email : edward.caissie@gmail.com)
+    Copyright 2011-2012  Edward Caissie  (email : edward.caissie@gmail.com)
 
     BNS Inline Asides is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as
@@ -19,7 +19,7 @@
         51 Franklin St, Fifth Floor
         Boston, MA  02110-1301  USA
 
-    Last revised at version 0.6
+    Last revised at version 0.7
 */
 
 span.close-aside, span.open-aside {
@@ -29,8 +29,8 @@ span.close-aside, span.open-aside {
   text-align: right;
 }
 
-.aside-toggler.closed .close-aside,
-.aside-toggler.open .open-aside,
+.bnsia-aside-toggler.closed .close-aside,
+.bnsia-aside-toggler.open .open-aside,
 .bnsia.aside.closed,
 blockquote.aside.closed,
 p.aside.closed {
