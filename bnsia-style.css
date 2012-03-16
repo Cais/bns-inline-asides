@@ -29,8 +29,8 @@ span.close-aside, span.open-aside {
   text-align: right;
 }
 
-.bnsia-aside-toggler.closed .close-aside,
-.bnsia-aside-toggler.open .open-aside,
+.bnsia-aside-toggler.bnsia-closed .close-aside,
+.bnsia-aside-toggler.bnsia-open .open-aside,
 .bnsia.aside.closed,
 blockquote.aside.closed,
 p.aside.closed {

@@ -173,7 +173,7 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
         // The secret sauce ...
         /** @var $show string - used as boolean control */
         /** @var $hide string - used as boolean control */
-        $toggle_markup = '<div class="bnsia-aside-toggler ' . $status . '">'
+        $toggle_markup = '<div class="bnsia-aside-toggler ' . 'bnsia-' . $status . '">'
                          . '<span class="open-aside' . $type_class . '">' . sprintf( __( $show, 'bns-ia' ), esc_attr( $type ) ) . '</span>'
                          . '<span class="close-aside' . $type_class . '">' . sprintf( __( $hide, 'bns-ia' ), esc_attr( $type ) ) . '</span>'
                          . '</div>';
@@ -189,8 +189,8 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
             /* <![CDATA[ */
             jQuery( document ).ready( function(){
                 jQuery( ".bnsia-aside-toggler" ).click( function(){
-                    jQuery( this ).toggleClass( "open" ).toggleClass( "closed" ).next( "' . bnsia_theme_element() . '.aside" ).slideToggle( "slow", function(){
-                        jQuery( this ).toggleClass( "open" ).toggleClass( "closed" );
+                    jQuery( this ).toggleClass( "bnsia-open" ).toggleClass( "bnsia-closed" ).next( "' . bnsia_theme_element() . '.aside" ).slideToggle( "slow", function(){
+                        jQuery( this ).toggleClass( "bnsia-open" ).toggleClass( "bnsia-closed" );
                     });
                 });
             });
@@ -208,3 +208,4 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
  * @todo Review for potential conflict with WordPress default post-format 'aside'
  */
 add_shortcode( 'aside', 'bns_inline_asides_shortcode' );
+?>
