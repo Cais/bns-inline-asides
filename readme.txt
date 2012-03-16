@@ -120,6 +120,7 @@ Please stay current with your WordPress installation, your active theme, and you
 == Changelog ==
 = 0.6.2 =
 * Added 'bnsia-' to 'aside-toggler' class for better namespacing
+* Added the appropriate textdomain to the secret sauce section of the code
 
 = 0.6 =
 * released November 2011
