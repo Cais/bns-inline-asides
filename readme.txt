@@ -3,8 +3,8 @@ Contributors: cais
 Donate link: http://buynowshop.com
 Tags: posts, pages, content, shortcode
 Requires at least: 3.0
-Tested up to: 3.3
-Stable tag: 0.6.1
+Tested up to: 3.4
+Stable tag: 0.6.2
 
 This plugin will allow you to style sections of the post, or page, content with added emphasis by leveraging a style element from the active theme.
 
@@ -87,7 +87,7 @@ Here are some examples:
 
 == Other Notes ==
 
-= Copyright 2011  Edward Caissie  (email : edward.caissie@gmail.com) =
+= Copyright 2011-2012  Edward Caissie  (email : edward.caissie@gmail.com) =
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 2,
@@ -118,6 +118,8 @@ Sample content taken from the "Readability" post of the Theme Unit Test data fou
 Please stay current with your WordPress installation, your active theme, and your plugins.
 
 == Changelog ==
+* confirmed compatible with WordPress 3.4
+
 = 0.6 =
 * released November 2011
 * confirmed compatible with WordPress version 3.3
