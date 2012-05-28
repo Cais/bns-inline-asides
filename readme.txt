@@ -118,7 +118,10 @@ Sample content taken from the "Readability" post of the Theme Unit Test data fou
 Please stay current with your WordPress installation, your active theme, and your plugins.
 
 == Changelog ==
+= 0.6.2 =
 * confirmed compatible with WordPress 3.4
+* inline documentation updates
+* added "changelog" styles
 
 = 0.6 =
 * released November 2011

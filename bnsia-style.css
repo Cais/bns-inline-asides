@@ -1,6 +1,6 @@
 /*  This file is part of BNS Inline Asides.
 
-    Copyright 2011  Edward Caissie  (email : edward.caissie@gmail.com)
+    Copyright 2011-2012  Edward Caissie  (email : edward.caissie@gmail.com)
 
     BNS Inline Asides is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License, version 2, as
@@ -19,7 +19,7 @@
         51 Franklin St, Fifth Floor
         Boston, MA  02110-1301  USA
 
-    Last revised at version 0.6
+    Last revised at version 0.6.2
 */
 
 span.close-aside, span.open-aside {
@@ -58,6 +58,14 @@ blockquote.aside.rant,
 p.aside.rant { /* Black text on a red background with a non-repeating flame graphic for added emphasis - Sample Only */
 	background: #ff0000 url('flame.png') no-repeat left;
 	color: #000;
+}
+
+/** Type: Note */
+.open-aside.changelog { background-color: #c0c0c0;}
+.bnsia.aside.changelog,
+blockquote.aside.changelog,
+p.aside.changelog { /* Default font-family as monospace - Sample Only */
+    font-family: monospace;
 }
 
 /** BNS Inline Asides Custom Types */

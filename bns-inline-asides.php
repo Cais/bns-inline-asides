@@ -21,7 +21,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @link        http://buynowshop.com/plugins/bns-inline-asides/
  * @link        https://github.com/Cais/bns-inline-asides/
  * @link        http://wordpress.org/extend/plugins/bns-inline-asides/
- * @version     0.6.1
+ * @version     0.6.2
  * @author      Edward Caissie <edward.caissie@gmail.com>
  * @copyright   Copyright (c) 2011-2012, Edward Caissie
  *
@@ -45,8 +45,9 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * The license for this software can also likely be found here:
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
- * Last revised November 22, 2011
- * @todo Add type=changelog
+ * @version 0.6.2
+ * @date    May 28, 2011
+ *
  * @todo Add type=Nota Bene -or- NB
  */
 
@@ -61,6 +62,8 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * @internal    Note: Translation files are expected to be found in the plugin root folder / directory.
  * @internal    `bns-ia` is being used in place of `bns-inline-asides`
+ *
+ * @uses        load_plugin_textdomain
  */
 load_plugin_textdomain( 'bns-ia' );
 // End: BNS Inline Asides TextDomain
@@ -70,7 +73,10 @@ load_plugin_textdomain( 'bns-ia' );
  *
  * @package     BNS_Inline_Asides
  * @since       0.1
- * @internal    Version 3.0 being used in reference to home_url()
+ *
+ * @internal    WordPress 3.0 required in reference to home_url()
+ *
+ * @uses        (global) $wp_version
  *
  * @version     0.6
  * Last revised November 21, 2011
@@ -78,7 +84,7 @@ load_plugin_textdomain( 'bns-ia' );
  */
 global $wp_version;
 $exit_ver_msg = __( 'BNS Inline Asides requires a minimum of WordPress 3.0, <a href="http://codex.wordpress.org/Upgrading_WordPress">Please Update!</a>', 'bns-ia' );
-if ( version_compare( $wp_version, "3.0", "<" ) ) { // per home_url() function
+if ( version_compare( $wp_version, "3.0", "<" ) ) {
     exit ( $exit_ver_msg );
 }
 
@@ -93,6 +99,11 @@ define( 'BNSIA_PATH', plugin_dir_path( __FILE__ ) );
  *
  * @package BNS_Inline_Asides
  * @since   0.4.1
+ *
+ * @uses    wp_enqueue_script
+ * @uses    wp_enqueue_style
+ * @uses    (CONSTANT) BNSIA_URL
+ * @uses    (CONSTANT) BNSIA_PATH
  */
 function BNSIA_Scripts_and_Styles() {
         /* Enqueue Scripts */
@@ -112,6 +123,21 @@ function BNSIA_Scripts_and_Styles() {
 add_action( 'wp_enqueue_scripts', 'BNSIA_Scripts_and_Styles' );
 
 // Let's begin ...
+/**
+ * BNS Inline Asides Shortcode
+ *
+ * @package BNS_Inline_Asides
+ * @since   0.1
+ *
+ * @param   $atts - shortcode attributes
+ * @param   null $content - the content
+ *
+ * @uses    bnsia_theme_element
+ * @uses    do_shortcode
+ * @uses    shortcode_atts
+ *
+ * @return  string
+ */
 function bns_inline_asides_shortcode( $atts, $content = null ) {
         extract( shortcode_atts( array( 'type'   => 'Aside',
                                         'show'   => 'To see the <em>%s</em> click here.',
@@ -163,6 +189,12 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
          */
 
         if ( ! function_exists( 'bnsia_theme_element' ) ) {
+            /**
+             * BNS Inline Asides Theme Element
+             * CSS / HTML element to use as container
+             *
+             * @return string|null
+             */
             function bnsia_theme_element() {
                     return '';
                     // return 'blockquote';
@@ -208,4 +240,3 @@ function bns_inline_asides_shortcode( $atts, $content = null ) {
  * @todo Review for potential conflict with WordPress default post-format 'aside'
  */
 add_shortcode( 'aside', 'bns_inline_asides_shortcode' );
-?>
