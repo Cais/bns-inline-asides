@@ -1,9 +1,9 @@
 === BNS Inline Asides ===
 Contributors: cais
 Donate link: http://buynowshop.com
-Tags: posts, pages, content, shortcode
+Tags: posts, pages, content, shortcode, plugin-only
 Requires at least: 3.0
-Tested up to: 3.4
+Tested up to: 3.4.2
 Stable tag: 0.6.2
 
 This plugin will allow you to style sections of the post, or page, content with added emphasis by leveraging a style element from the active theme.
