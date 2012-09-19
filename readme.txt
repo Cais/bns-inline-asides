@@ -3,8 +3,8 @@ Contributors: cais
 Donate link: http://buynowshop.com
 Tags: posts, pages, content, shortcode, plugin-only
 Requires at least: 3.0
-Tested up to: 3.4.2
-Stable tag: 0.6.2
+Tested up to: 3.5-LPH
+Stable tag: 0.7
 
 This plugin will allow you to style sections of the post, or page, content with added emphasis by leveraging a style element from the active theme.
 
@@ -118,6 +118,9 @@ Sample content taken from the "Readability" post of the Theme Unit Test data fou
 Please stay current with your WordPress installation, your active theme, and your plugins.
 
 == Changelog ==
+= 0.7 =
+* Implement OOP style class coding
+
 = 0.6.2 =
 * confirmed compatible with WordPress 3.4
 * inline documentation updates
