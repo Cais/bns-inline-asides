@@ -1,26 +1,28 @@
-/*  This file is part of BNS Inline Asides.
+/**
+ * This file is part of BNS Inline Asides plugin
+ * Last revised at version 0.7
+ *
+ * Copyright 2011-2012  Edward Caissie  (email : edward.caissie@gmail.com)
+ *
+ * BNS Inline Asides is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License, version 2, as published
+ * by the Free Software Foundation.
+ *
+ * You may NOT assume that you can use any other version of the GPL.
+ *
+ * BNS Inline Asides is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program; if not, write to:
+ *
+ *      Free Software Foundation, Inc.
+ *      51 Franklin St, Fifth Floor
+ *      Boston, MA  02110-1301  USA
+ */
 
-    Copyright 2011-2012  Edward Caissie  (email : edward.caissie@gmail.com)
-
-    BNS Inline Asides is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as
-    published by the Free Software Foundation.
-
-    You may NOT assume that you can use any other version of the GPL.
-
-    BNS Inline Asides is distributed in the hope that it will be useful, but
-    WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
-    or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-    more details.
-
-    You should have received a copy of the GNU General Public License along with
-    this program; if not, write to:
-        Free Software Foundation, Inc.
-        51 Franklin St, Fifth Floor
-        Boston, MA  02110-1301  USA
-
-    Last revised at version 0.6.2
-*/
 
 span.close-aside, span.open-aside {
   border-bottom: thin solid black;
@@ -60,12 +62,34 @@ p.aside.rant { /* Black text on a red background with a non-repeating flame grap
 	color: #000;
 }
 
-/** Type: Note */
-.open-aside.changelog { background-color: #c0c0c0;}
+/** Type: Changelog */
+.open-aside.changelog { background-color: #c0c0c0; }
 .bnsia.aside.changelog,
 blockquote.aside.changelog,
 p.aside.changelog { /* Default font-family as monospace - Sample Only */
     font-family: monospace;
+}
+
+/** Type: Footnote */
+.open-aside.footnote { background-color: #c0c0c0; }
+.bnsia.aside.footnote,
+blockquote.aside.footnote,
+p.aside.footnote {
+    background-color: #c0c0c0;
+}
+.bnsia.aside.footnote ol,
+blockquote.aside.footnote ol,
+p.aside.footnote ol {
+    list-style-type: lower-roman;
+}
+
+/** Type: Nota Bene -or- NB */
+.open-aside.nb, .open-aside.nota-bene { background-color: #c0c0c0; }
+.bnsia.aside.nb, .bnsia.aside.nota-bene,
+blockquote.aside.nb, blockquote.aside.nota-bene,
+p.aside.nb, p.aside.nota-bene {
+    background-color: #c0c0c0;
+    font-style: italic;
 }
 
 /** BNS Inline Asides Custom Types */
@@ -84,12 +108,12 @@ p.aside.changelog { /* Default font-family as monospace - Sample Only */
  *  blockquote.aside.bacon
  *  p.aside.bacon
  *
- * NB: Make sure to use the correct prefix, the default is: blockquote.
+ * NB: Make sure to use the correct prefix, the default is no prefix.
  *
  * This method can also be used to over-write the Pre-Defined Aside Types styles
  * as the bnsia-custom-types.css file loads after the main stylesheet.
  *
- * The bnsia-custom-types.css stylesheet should not be over-written by updates.
+ * The bnsia-custom-types.css stylesheet will not be over-written by updates.
  *
  * Enjoy!
  *

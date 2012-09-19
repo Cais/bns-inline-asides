@@ -3,8 +3,10 @@ Contributors: cais
 Donate link: http://buynowshop.com
 Tags: posts, pages, content, shortcode, plugin-only
 Requires at least: 3.0
-Tested up to: 3.5-LPH
+Tested up to: 3.5-alpha
 Stable tag: 0.7
+License: GNU General Public License v2
+License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 This plugin will allow you to style sections of the post, or page, content with added emphasis by leveraging a style element from the active theme.
 
@@ -120,6 +122,9 @@ Please stay current with your WordPress installation, your active theme, and you
 == Changelog ==
 = 0.7 =
 * Implement OOP style class coding
+* Internal documentation updates and improve code formating
+* Add Type: Footnote
+* Add Type: Nota Bene (can also use the more common shortform NB)
 
 = 0.6.2 =
 * confirmed compatible with WordPress 3.4

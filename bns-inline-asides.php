@@ -48,6 +48,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @version 0.7
  * @date    September 19, 2012
  * Implement OOP style class coding
+ * Internal documentation updates
  *
  * @todo Add type=Nota Bene -or- NB
  */
@@ -87,7 +88,7 @@ class BNS_Inline_Asides {
          * @uses        (global) $wp_version
          *
          * @version     0.6
-         * Last revised November 21, 2011
+         * @date        November 21, 2011
          * Re-write to be i18n compatible
          */
         global $wp_version;
@@ -100,10 +101,12 @@ class BNS_Inline_Asides {
         add_action( 'wp_enqueue_scripts', array( $this, 'BNSIA_Scripts_and_Styles' ) );
 
         /**
-         * We're done ... let's wrap this up into a simple shortcode!
-         * @example [aside type="Aside" status="open" show="To see the <em>%s</em> click here." hide="To hide the <em>%s</em> click here."]The aside text.[/aside]
-         *
-         * @todo Review for potential conflict with WordPress default post-format 'aside'
+         * Add Shortcode
+         * @example [aside]text[/aside]
+         * @internal default type="Aside"
+         * @internal default status="open"
+         * @internal default show="To see the <em>%s</em> click here."
+         * @internal default hide="To hide the <em>%s</em> click here."]The aside text.
          */
         add_shortcode( 'aside', array( $this, 'bns_inline_asides_shortcode' ) );
     }
@@ -153,11 +156,15 @@ class BNS_Inline_Asides {
      * @return  string
      */
     function bns_inline_asides_shortcode( $atts, $content = null ) {
-        extract( shortcode_atts( array( 'type'   => 'Aside',
-                'show'   => 'To see the <em>%s</em> click here.',
-                'hide'   => 'To hide the <em>%s</em> click here.',
-                'status' => 'open',
-            ), $atts )
+        extract(
+            shortcode_atts(
+                array(
+                    'type'   => 'Aside',
+                    'show'   => 'To see the <em>%s</em> click here.',
+                    'hide'   => 'To hide the <em>%s</em> click here.',
+                    'status' => 'open',
+                ),
+                $atts )
         );
 
         /** clean up shortcode properties */
@@ -196,7 +203,7 @@ class BNS_Inline_Asides {
          * @return string
          *
          * @version 0.6.1
-         * Last revised November 22, 2011
+         * @date    November 22, 2011
          * Corrected issue with conditional - Fatal error: Cannot redeclare bnsia_theme_element()
          *
          * @todo Add option page to choose which theme element, if any, to use
