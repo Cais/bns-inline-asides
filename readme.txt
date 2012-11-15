@@ -3,8 +3,8 @@ Contributors: cais
 Donate link: http://buynowshop.com
 Tags: posts, pages, content, shortcode, plugin-only
 Requires at least: 3.0
-Tested up to: 3.5-alpha
-Stable tag: 0.7
+Tested up to: 3.5
+Stable tag: 0.8
 License: GNU General Public License v2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -125,6 +125,7 @@ Please stay current with your WordPress installation, your active theme, and you
 
 == Changelog ==
 = 0.8 =
+* Released November 2012
 * Add `element` shortcode attribute to allow the use of specific HTML tags
 * Corrected documentation typos
 * Implemented HTML tags: aside, blockquote, code, h1 through h6, pre, and q;
