@@ -3,7 +3,7 @@
 Plugin Name: BNS Inline Asides
 Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
 Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
-Version: 0.7
+Version: 0.8
 Text Domain: bns-ia
 Author: Edward Caissie
 Author URI: http://edwardcaissie.com/
@@ -21,7 +21,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @link        http://buynowshop.com/plugins/bns-inline-asides/
  * @link        https://github.com/Cais/bns-inline-asides/
  * @link        http://wordpress.org/extend/plugins/bns-inline-asides/
- * @version     0.7
+ * @version     0.8
  * @author      Edward Caissie <edward.caissie@gmail.com>
  * @copyright   Copyright (c) 2011-2012, Edward Caissie
  *
@@ -50,7 +50,9 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Implement OOP style class coding
  * Internal documentation updates
  *
- * @todo Add type=Nota Bene -or- NB
+ * @version 0.8
+ * @date    November 15, 2012
+ * Remove `load_plugin_textdomain` as redundant
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
@@ -62,20 +64,6 @@ class BNS_Inline_Asides {
         /** Define some constants to save some keying */
         define( 'BNSIA_URL', plugin_dir_url( __FILE__ ) );
         define( 'BNSIA_PATH', plugin_dir_path( __FILE__ ) );
-
-        /**
-         * BNS Inline Asides TextDomain
-         * Make plugin text available for translation (i18n)
-         *
-         * @package:    BNS_Inline_Asides
-         * @since:      0.6
-         *
-         * @internal    Note: Translation files are expected to be found in the plugin root folder / directory.
-         * @internal    `bns-ia` is being used in place of `bns-inline-asides`
-         *
-         * @uses        load_plugin_textdomain
-         */
-        load_plugin_textdomain( 'bns-ia' );
 
         /**
          * Check installed WordPress version for compatibility
@@ -104,6 +92,7 @@ class BNS_Inline_Asides {
          * Add Shortcode
          * @example [aside]text[/aside]
          * @internal default type="Aside"
+         * @internal default element='' (an empty string)
          * @internal default status="open"
          * @internal default show="To see the <em>%s</em> click here."
          * @internal default hide="To hide the <em>%s</em> click here."]The aside text.
@@ -159,10 +148,11 @@ class BNS_Inline_Asides {
         extract(
             shortcode_atts(
                 array(
-                    'type'   => 'Aside',
-                    'show'   => 'To see the <em>%s</em> click here.',
-                    'hide'   => 'To hide the <em>%s</em> click here.',
-                    'status' => 'open',
+                    'type'      => 'Aside',
+                    'element'   => '',
+                    'show'      => 'To see the <em>%s</em> click here.',
+                    'hide'      => 'To hide the <em>%s</em> click here.',
+                    'status'    => 'open',
                 ),
                 $atts )
         );
@@ -175,9 +165,8 @@ class BNS_Inline_Asides {
 
         /**
          * @var $type_class string - leaves any end-user capitalization for aesthetics
-         * @todo Find a cleaner way to modify the $text_class variable
+         * @var $type string - default: Aside; or defined by end-user
          */
-        /** @var $type string - default: Aside; or defined by end-user */
         $type_class = esc_attr( strtolower( $type ) );
         /** replace whitespace with a single space */
         $type_class = preg_replace( '/\s\s+/', ' ', $type_class );
@@ -191,23 +180,9 @@ class BNS_Inline_Asides {
             $type_class = ' ' . $type_class;
         }
 
-        /**
-         * BNSIA Theme Element
-         *
-         * Plugin currently supports <blockquote> and <p> block elements, or the default <div class = bnsia>
-         *
-         * @package BNS_Inline_Asides
-         * @since 0.6
-         * @internal manual edit is required to change
-         *
-         * @return string
-         *
-         * @version 0.6.1
-         * @date    November 22, 2011
-         * Corrected issue with conditional - Fatal error: Cannot redeclare bnsia_theme_element()
-         *
-         * @todo Add option page to choose which theme element, if any, to use
-         */
+        global $bnsia_element;
+        /** @var $element string - default is null; used as additional css container element */
+        $bnsia_element = $this->replace_spaces( $element );
 
         // The secret sauce ...
         /** @var $show string - used as boolean control */
@@ -216,10 +191,10 @@ class BNS_Inline_Asides {
             . '<span class="open-aside' . $type_class . '">' . sprintf( __( $show ), esc_attr( $type ) ) . '</span>'
             . '<span class="close-aside' . $type_class . '">' . sprintf( __( $hide ), esc_attr( $type ) ) . '</span>
                          </div>';
-        if ( $this->bnsia_theme_element() == '' ) {
+        if ( $this->bnsia_theme_element( $bnsia_element ) == '' ) {
             $return = $toggle_markup . '<div class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</div>';
         } else {
-            $return = $toggle_markup . '<' . $this->bnsia_theme_element() . ' class="aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . $this->bnsia_theme_element() . '>';
+            $return = $toggle_markup . '<' . $this->bnsia_theme_element( $bnsia_element ) . ' class="aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . $this->bnsia_theme_element( $bnsia_element ) . '>';
         }
 
         static $script_output;
@@ -228,7 +203,7 @@ class BNS_Inline_Asides {
             /* <![CDATA[ */
             jQuery( document ).ready( function(){
                 jQuery( ".aside-toggler" ).click( function(){
-                    jQuery( this ).toggleClass( "open" ).toggleClass( "closed" ).next( "' . $this->bnsia_theme_element() . '.aside" ).slideToggle( "slow", function(){
+                    jQuery( this ).toggleClass( "open" ).toggleClass( "closed" ).next( "' . $this->bnsia_theme_element( $bnsia_element ) . '.aside" ).slideToggle( "slow", function(){
                         jQuery( this ).toggleClass( "open" ).toggleClass( "closed" );
                     });
                 });
@@ -241,15 +216,80 @@ class BNS_Inline_Asides {
     }
 
     /**
-     * BNS Inline Asides Theme Element
-     * CSS / HTML element to use as container
+     * Replace Spaces
+     * Takes a string and replaces the spaces with a single hyphen by default
      *
-     * @return string|null
+     * @package BNS_Inline_asides
+     * @since   0.8
+     *
+     * @internal Original code from Opus Primus by Edward "Cais" Caissie ( mailto:edward.caissie@gmail.com )
+     *
+     * @param   string $text
+     * @param   string $replacement
+     *
+     * @return  string - class
      */
-    function bnsia_theme_element() {
-        return '';
-        // return 'blockquote';
-        // return 'p';
+    function replace_spaces( $text, $replacement='-' ) {
+        /** @var $new_text - initial text set to lower case */
+        $new_text = esc_attr( strtolower( $text ) );
+        /** replace whitespace with a single space */
+        $new_text = preg_replace( '/\s\s+/', ' ', $new_text );
+        /** replace space with a hyphen to create nice CSS classes */
+        $new_text = preg_replace( '/\\040/', $replacement, $new_text );
+
+        /** Return the string with spaces replaced by the replacement variable */
+        return $new_text;
+    }
+
+
+    /**
+     * BNSIA Theme Element
+     * Plugin currently supports the following HTML tags: aside, blockquote,
+     * code, h1 through h6, pre, and q; or uses the default <div class = bnsia>
+     *
+     * @package BNS_Inline_Asides
+     * @since   0.6
+     *
+     * @param   (global) $bnsia_element - string taken from shortcode $atts( 'element' )
+     *
+     * @internal The HTML `p` tag is not recommended at this time (version 0.8),
+     * especially for text that spans multiple paragraphs
+     *
+     * @return  string - accepted HTML tag | empty
+     *
+     * @version 0.6.1
+     * @date    November 22, 2011
+     * Corrected issue with conditional - Fatal error: Cannot re-declare bnsia_theme_element()
+     *
+     * @version 0.8
+     * @date    November 15, 2012
+     * Accept the shortcode $att( 'element' ) and return the value for use with
+     * the output strings if it is an accepted HTML tag
+     */
+    function bnsia_theme_element( $bnsia_element ) {
+        if ( empty( $bnsia_element ) ) {
+            /** Default - 'element' is empty or not used */
+            return '';
+        } elseif (
+            /** List accepted HTML tags */
+            'aside'         == $bnsia_element ||
+            'blockquote'    == $bnsia_element ||
+            'code'          == $bnsia_element ||
+            'h1'            == $bnsia_element ||
+            'h2'            == $bnsia_element ||
+            'h3'            == $bnsia_element ||
+            'h4'            == $bnsia_element ||
+            'h5'            == $bnsia_element ||
+            'h6'            == $bnsia_element ||
+            'pre'           == $bnsia_element ||
+            'q'             == $bnsia_element ) {
+
+            return $bnsia_element;
+
+        } else {
+            /** If not an accepted HTML tag return an empty string */
+            return '';
+        }
     }
 
 }

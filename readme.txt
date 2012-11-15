@@ -3,8 +3,8 @@ Contributors: cais
 Donate link: http://buynowshop.com
 Tags: posts, pages, content, shortcode, plugin-only
 Requires at least: 3.0
-Tested up to: 3.5-alpha
-Stable tag: 0.7
+Tested up to: 3.5
+Stable tag: 0.8
 License: GNU General Public License v2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -60,6 +60,11 @@ See the frequently asked questions section for how to add your own custom type.
 
 == Frequently Asked Questions ==
 
+= Why doesn't the "Rant" type work with the "H" tags? =
+Not all possible combinations of existing BNS Inline Aside types have been set as defaults.
+Please feel free to add the bns-inline-asides-custom-stylesheet.css option and create your own combinations ...
+... and let us know about them. We would be very happy to consider adding them as defaults.
+
 = How can I style the plugin output? =
 To add your own custom aside type styles you might consider creating a new stylesheet in this plugin's folder using the name: bnsia-custom-types.css
 
@@ -69,7 +74,6 @@ The plugin will create a class name from the custom aside type you use in your s
 * .close-aside.bacon
 * .bnsia.aside.bacon
 * blockquote.aside.bacon
-* p.aside.bacon
 
 This method can also be used to over-write the Pre-Defined Aside Types styles as the bnsia-custom-types.css file loads after the main stylesheet.
 
@@ -123,11 +127,21 @@ Sample content taken from the "Readability" post of the Theme Unit Test data fou
 Please stay current with your WordPress installation, your active theme, and your plugins.
 
 == Changelog ==
+= 0.8 =
+* Released November 2012
+* Add `element` shortcode attribute to allow the use of specific HTML tags
+* Corrected documentation typos
+* Implemented HTML tags: aside, blockquote, code, h1 through h6, pre, and q;
+* Removed `load_plugin_textdomain` as redundant
+* Removed `p` CSS related elements and properties
+* Removed `blockquote` `background: none` property
+* Updated the 'readme' FAQ section to reference the new functionality
+
 = 0.7 =
 * Implement OOP style class coding
-* Internal documentation updates and improve code formating
+* Internal documentation updates and improve code formatting
 * Add Type: Footnote
-* Add Type: Nota Bene (can also use the more common shortform NB)
+* Add Type: Nota Bene (can also use the more common short-form NB)
 
 = 0.6.2 =
 * confirmed compatible with WordPress 3.4

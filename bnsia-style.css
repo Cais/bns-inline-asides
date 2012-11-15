@@ -1,6 +1,6 @@
 /**
  * This file is part of BNS Inline Asides plugin
- * Last revised at version 0.7
+ * Last revised at version 0.8
  *
  * Copyright 2011-2012  Edward Caissie  (email : edward.caissie@gmail.com)
  *
@@ -34,8 +34,7 @@ span.close-aside, span.open-aside {
 .aside-toggler.closed .close-aside,
 .aside-toggler.open .open-aside,
 .bnsia.aside.closed,
-blockquote.aside.closed,
-p.aside.closed {
+blockquote.aside.closed {
   display:none;
 }
 
@@ -43,21 +42,24 @@ p.aside.closed {
 .bnsia.aside { padding: 10px; }
 
 /** Remove any background image from blockquote if it exists */
-blockquote.aside { background-image: none; }
+/** blockquote.aside { background-image: none; } */
 
 /** Pre-Defined BNS Inline Aside Types */
 /** Type: Note */
 .open-aside.note { background-color: #c0c0c0;}
 .bnsia.aside.note,
-blockquote.aside.note,
-p.aside.note { /* Default text color on Light Grey background - Sample Only */
+blockquote.aside.note {
+    /** Default text color on Light Grey background - Sample Only */
     background-color: #c0c0c0; }
 
 /** Type: Rant */
 .open-aside.rant { background-color: #ff0000; color: #000; }
 .bnsia.aside.rant,
-blockquote.aside.rant,
-p.aside.rant { /* Black text on a red background with a non-repeating flame graphic for added emphasis - Sample Only */
+blockquote.aside.rant {
+    /**
+     * Black text on a red background with a non-repeating flame graphic for
+     * added emphasis - Sample Only
+     */
 	background: #ff0000 url('flame.png') no-repeat left;
 	color: #000;
 }
@@ -65,29 +67,26 @@ p.aside.rant { /* Black text on a red background with a non-repeating flame grap
 /** Type: Changelog */
 .open-aside.changelog { background-color: #c0c0c0; }
 .bnsia.aside.changelog,
-blockquote.aside.changelog,
-p.aside.changelog { /* Default font-family as monospace - Sample Only */
+blockquote.aside.changelog {
+    /** Default font-family as monospace - Sample Only */
     font-family: monospace;
 }
 
 /** Type: Footnote */
 .open-aside.footnote { background-color: #c0c0c0; }
 .bnsia.aside.footnote,
-blockquote.aside.footnote,
-p.aside.footnote {
+blockquote.aside.footnote {
     background-color: #c0c0c0;
 }
 .bnsia.aside.footnote ol,
-blockquote.aside.footnote ol,
-p.aside.footnote ol {
+blockquote.aside.footnote ol {
     list-style-type: lower-roman;
 }
 
 /** Type: Nota Bene -or- NB */
 .open-aside.nb, .open-aside.nota-bene { background-color: #c0c0c0; }
 .bnsia.aside.nb, .bnsia.aside.nota-bene,
-blockquote.aside.nb, blockquote.aside.nota-bene,
-p.aside.nb, p.aside.nota-bene {
+blockquote.aside.nb, blockquote.aside.nota-bene {
     background-color: #c0c0c0;
     font-style: italic;
 }
@@ -106,7 +105,6 @@ p.aside.nb, p.aside.nota-bene {
  *  .close-aside.bacon
  *  .bnsia.aside.bacon
  *  blockquote.aside.bacon
- *  p.aside.bacon
  *
  * NB: Make sure to use the correct prefix, the default is no prefix.
  *
