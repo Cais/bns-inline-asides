@@ -120,11 +120,15 @@ Sample content taken from the "Readability" post of the Theme Unit Test data fou
 Please stay current with your WordPress installation, your active theme, and your plugins.
 
 == Changelog ==
+= 0.8 =
+* Corrected documentation typos
+* Remove `load_plugin_textdomain` as redundant
+
 = 0.7 =
 * Implement OOP style class coding
-* Internal documentation updates and improve code formating
+* Internal documentation updates and improve code formatting
 * Add Type: Footnote
-* Add Type: Nota Bene (can also use the more common shortform NB)
+* Add Type: Nota Bene (can also use the more common short-form NB)
 
 = 0.6.2 =
 * confirmed compatible with WordPress 3.4
