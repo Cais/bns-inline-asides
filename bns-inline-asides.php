@@ -179,24 +179,6 @@ class BNS_Inline_Asides {
             $type_class = ' ' . $type_class;
         }
 
-        /**
-         * BNSIA Theme Element
-         *
-         * Plugin currently supports <blockquote> and <p> block elements, or the default <div class = bnsia>
-         *
-         * @package BNS_Inline_Asides
-         * @since 0.6
-         * @internal manual edit is required to change
-         *
-         * @return string
-         *
-         * @version 0.6.1
-         * @date    November 22, 2011
-         * Corrected issue with conditional - Fatal error: Cannot redeclare bnsia_theme_element()
-         *
-         * @todo Add option page to choose which theme element, if any, to use
-         */
-
         // The secret sauce ...
         /** @var $show string - used as boolean control */
         /** @var $hide string - used as boolean control */
@@ -229,10 +211,20 @@ class BNS_Inline_Asides {
     }
 
     /**
-     * BNS Inline Asides Theme Element
-     * CSS / HTML element to use as container
+     * BNSIA Theme Element
+     * Plugin currently supports <blockquote> and <p> block elements, or the default <div class = bnsia>
      *
-     * @return string|null
+     * @package BNS_Inline_Asides
+     * @since   0.6
+     * @internal manual edit is required to change
+     *
+     * @return  string
+     *
+     * @version 0.6.1
+     * @date    November 22, 2011
+     * Corrected issue with conditional - Fatal error: Cannot re-declare bnsia_theme_element()
+     *
+     * @todo Add option page to choose which theme element, if any, to use
      */
     function bnsia_theme_element() {
         return '';
