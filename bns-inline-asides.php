@@ -3,7 +3,7 @@
 Plugin Name: BNS Inline Asides
 Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
 Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
-Version: 0.8
+Version: 0.8.1
 Text Domain: bns-ia
 Author: Edward Caissie
 Author URI: http://edwardcaissie.com/
@@ -21,7 +21,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @link        http://buynowshop.com/plugins/bns-inline-asides/
  * @link        https://github.com/Cais/bns-inline-asides/
  * @link        http://wordpress.org/extend/plugins/bns-inline-asides/
- * @version     0.8
+ * @version     0.8.1
  * @author      Edward Caissie <edward.caissie@gmail.com>
  * @copyright   Copyright (c) 2011-2012, Edward Caissie
  *
@@ -53,6 +53,10 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @version 0.8
  * @date    November 15, 2012
  * Remove `load_plugin_textdomain` as redundant
+ *
+ * @version 0.8.1
+ * @date    December 30, 2012
+ * Added Jetpack hack for single view conflict
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
@@ -95,7 +99,7 @@ class BNS_Inline_Asides {
          * @internal default element='' (an empty string)
          * @internal default status="open"
          * @internal default show="To see the <em>%s</em> click here."
-         * @internal default hide="To hide the <em>%s</em> click here."]The aside text.
+         * @internal default hide="To hide the <em>%s</em> click here."
          */
         add_shortcode( 'aside', array( $this, 'bns_inline_asides_shortcode' ) );
     }
@@ -114,6 +118,11 @@ class BNS_Inline_Asides {
      * @uses    (CONSTANT) BNSIA_PATH
      */
     function BNSIA_Scripts_and_Styles() {
+        /** Call the wp-admin plugin code */
+        require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+        /** @var $bnsia_data - holds the plugin header data */
+        $bnsia_data = get_plugin_data( __FILE__ );
+
         /* Enqueue Scripts */
         wp_enqueue_script( 'jquery' );
         /**
@@ -123,9 +132,9 @@ class BNS_Inline_Asides {
          */
 
         /* Enqueue Style Sheets */
-        wp_enqueue_style( 'BNSIA-Style', BNSIA_URL . 'bnsia-style.css', array(), '0.6', 'screen' );
+        wp_enqueue_style( 'BNSIA-Style', BNSIA_URL . 'bnsia-style.css', array(), $bnsia_data['Version'], 'screen' );
         if ( is_readable( BNSIA_PATH . 'bnsia-custom-types.css' ) ) {
-            wp_enqueue_style( 'BNSIA-Custom-Types', BNSIA_URL . 'bnsia-custom-types.css', array(), '0.6', 'screen' );
+            wp_enqueue_style( 'BNSIA-Custom-Types', BNSIA_URL . 'bnsia-custom-types.css', array(), $bnsia_data['Version'], 'screen' );
         }
     }
 
@@ -162,6 +171,15 @@ class BNS_Inline_Asides {
         $status = esc_attr( strtolower( $status ) );
         if ( $status != "open" )
             $status = "closed";
+
+        /**
+         * Jetpack hack / workaround - plugin Javascript is stripped by Jetpack
+         * somewhere; once this God-forsaken plugin is fixed remove this hack
+         */
+        if ( ( is_single() || is_page() ) && Jetpack::is_active() ) {
+            $hide   = '<span class="jetpack-active">Jetpack plugin active; functionality lost :(</span>';
+            $status = "open";
+        }
 
         /**
          * @var $type_class string - leaves any end-user capitalization for aesthetics

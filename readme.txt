@@ -4,7 +4,7 @@ Donate link: http://buynowshop.com
 Tags: posts, pages, content, shortcode, plugin-only
 Requires at least: 3.0
 Tested up to: 3.5
-Stable tag: 0.8
+Stable tag: 0.8.1
 License: GNU General Public License v2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -127,6 +127,10 @@ Sample content taken from the "Readability" post of the Theme Unit Test data fou
 Please stay current with your WordPress installation, your active theme, and your plugins.
 
 == Changelog ==
+= 0.8.1 =
+* Released December 2012
+* Added Jetpack hack for single view conflict
+
 = 0.8 =
 * Released November 2012
 * Add `element` shortcode attribute to allow the use of specific HTML tags

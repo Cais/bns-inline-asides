@@ -1,6 +1,6 @@
 /**
  * This file is part of BNS Inline Asides plugin
- * Last revised at version 0.8
+ * Last revised at version 0.8.1
  *
  * Copyright 2011-2012  Edward Caissie  (email : edward.caissie@gmail.com)
  *
@@ -88,6 +88,12 @@ blockquote.aside.footnote ol {
 .bnsia.aside.nb, .bnsia.aside.nota-bene,
 blockquote.aside.nb, blockquote.aside.nota-bene {
     background-color: #c0c0c0;
+    font-style: italic;
+}
+
+/** Jetpack hack */
+span.jetpack-active{
+    font-size: smaller;
     font-style: italic;
 }
 
