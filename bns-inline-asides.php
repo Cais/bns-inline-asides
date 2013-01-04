@@ -3,7 +3,7 @@
 Plugin Name: BNS Inline Asides
 Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
 Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
-Version: 0.8.1
+Version: 0.9
 Text Domain: bns-ia
 Author: Edward Caissie
 Author URI: http://edwardcaissie.com/
@@ -21,9 +21,9 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @link        http://buynowshop.com/plugins/bns-inline-asides/
  * @link        https://github.com/Cais/bns-inline-asides/
  * @link        http://wordpress.org/extend/plugins/bns-inline-asides/
- * @version     0.8.1
+ * @version     0.9
  * @author      Edward Caissie <edward.caissie@gmail.com>
- * @copyright   Copyright (c) 2011-2012, Edward Caissie
+ * @copyright   Copyright (c) 2011-2013, Edward Caissie
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License version 2, as published by the
@@ -57,6 +57,12 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @version 0.8.1
  * @date    December 30, 2012
  * Added Jetpack hack for single view conflict
+ *
+ * @version 0.9
+ * @date    January 4, 2013
+ * Removed Jetpack counter-measures hack
+ * Moved JavaScript from inline to its own enqueued file
+ * Implemented `wp_localize_script` to maintain the dynamic element
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
@@ -125,11 +131,7 @@ class BNS_Inline_Asides {
 
         /* Enqueue Scripts */
         wp_enqueue_script( 'jquery' );
-        /**
-         * @todo Move scripts into their own folder? ... and localize?
-         * wp_enqueue_script( 'bnsia_script', BNSIA_PATH . 'bnsia-script.js', array( 'jquery' ) );
-         * wp_localize_script( 'bnsia_script', 'BNSIA_Settings', array( 'variable_1' => "some value", 'variable_2' => "another value" ) );
-         */
+        wp_enqueue_script( 'bnsia_script', BNSIA_URL . 'bnsia-script.js', array( 'jquery' ), $bnsia_data['Version'] );
 
         /* Enqueue Style Sheets */
         wp_enqueue_style( 'BNSIA-Style', BNSIA_URL . 'bnsia-style.css', array(), $bnsia_data['Version'], 'screen' );
@@ -150,8 +152,14 @@ class BNS_Inline_Asides {
      * @uses    bnsia_theme_element
      * @uses    do_shortcode
      * @uses    shortcode_atts
+     * @uses    wp_localize_script
      *
      * @return  string
+     *
+     * @version 0.9
+     * @date    January 4, 2013
+     * Moved JavaScript into its own file and pass the element variable via
+     * wp_localize_script
      */
     function bns_inline_asides_shortcode( $atts, $content = null ) {
         extract(
@@ -171,15 +179,6 @@ class BNS_Inline_Asides {
         $status = esc_attr( strtolower( $status ) );
         if ( $status != "open" )
             $status = "closed";
-
-        /**
-         * Jetpack hack / workaround - plugin Javascript is stripped by Jetpack
-         * somewhere; once this God-forsaken plugin is fixed remove this hack
-         */
-        if ( ( is_single() || is_page() ) && Jetpack::is_active() ) {
-            $hide   = '<span class="jetpack-active">Jetpack plugin active; functionality lost :(</span>';
-            $status = "open";
-        }
 
         /**
          * @var $type_class string - leaves any end-user capitalization for aesthetics
@@ -215,22 +214,11 @@ class BNS_Inline_Asides {
             $return = $toggle_markup . '<' . $this->bnsia_theme_element( $bnsia_element ) . ' class="aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . $this->bnsia_theme_element( $bnsia_element ) . '>';
         }
 
-        static $script_output;
-        if ( ! isset( $script_output ) ) {
-            $return .= '<script type="text/javascript">
-            /* <![CDATA[ */
-            jQuery( document ).ready( function(){
-                jQuery( ".aside-toggler" ).click( function(){
-                    jQuery( this ).toggleClass( "open" ).toggleClass( "closed" ).next( "' . $this->bnsia_theme_element( $bnsia_element ) . '.aside" ).slideToggle( "slow", function(){
-                        jQuery( this ).toggleClass( "open" ).toggleClass( "closed" );
-                    });
-                });
-            });
-            /* ]]> */
-            </script>';
-            $script_output = true;
-        }
+        /** Grab the element of choice and push it through the JavaScript */
+        wp_localize_script( 'bnsia_script', 'element', $this->bnsia_theme_element( $bnsia_element ) );
+
         return $return;
+
     }
 
     /**
