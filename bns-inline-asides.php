@@ -63,6 +63,8 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * Removed Jetpack counter-measures hack
  * Moved JavaScript from inline to its own enqueued file
  * Implemented `wp_localize_script` to maintain the dynamic element
+ *
+ * @todo Add new type: Hat Tip (use a top hat as a background image?)
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
