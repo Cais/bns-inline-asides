@@ -3,8 +3,8 @@ Contributors: cais
 Donate link: http://buynowshop.com
 Tags: posts, pages, content, shortcode, plugin-only
 Requires at least: 3.0
-Tested up to: 3.5
-Stable tag: 0.9
+Tested up to: 3.6
+Stable tag: 1.0
 License: GNU General Public License v2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -96,7 +96,7 @@ Here are some examples:
 
 == Other Notes ==
 
-= Copyright 2011-2012  Edward Caissie  (email : edward.caissie@gmail.com) =
+= Copyright 2011-2013  Edward Caissie  (email : edward.caissie@gmail.com) =
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 2,
@@ -127,6 +127,11 @@ Sample content taken from the "Readability" post of the Theme Unit Test data fou
 Please stay current with your WordPress installation, your active theme, and your plugins.
 
 == Changelog ==
+= 1.0 =
+* Released April 2013
+* Added code block termination comments
+* Removed unused style definitions
+
 = 0.9 =
 * Released January 2013
 * Removed Jetpack counter-measures hack

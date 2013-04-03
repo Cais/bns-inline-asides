@@ -2,7 +2,7 @@
  * This file is part of BNS Inline Asides plugin
  * Last revised at version 0.8.1
  *
- * Copyright 2011-2012  Edward Caissie  (email : edward.caissie@gmail.com)
+ * Copyright 2011-2013  Edward Caissie  (email : edward.caissie@gmail.com)
  *
  * BNS Inline Asides is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 2, as published
@@ -22,7 +22,6 @@
  *      51 Franklin St, Fifth Floor
  *      Boston, MA  02110-1301  USA
  */
-
 
 span.close-aside, span.open-aside {
   border-bottom: thin solid black;
@@ -91,12 +90,7 @@ blockquote.aside.nb, blockquote.aside.nota-bene {
     font-style: italic;
 }
 
-/** Jetpack hack */
-span.jetpack-active{
-    font-size: smaller;
-    font-style: italic;
-}
-
+/** ------------------------------------------------------------------------- */
 /** BNS Inline Asides Custom Types */
 /**
  * To add your own custom aside type styles you might consider creating a new
