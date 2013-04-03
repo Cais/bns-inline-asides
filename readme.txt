@@ -130,6 +130,7 @@ Please stay current with your WordPress installation, your active theme, and you
 = 1.0 =
 * Released April 2013
 * Added code block termination comments
+* Added style definitions for "Hat Tip" type
 * Removed unused style definitions
 
 = 0.9 =

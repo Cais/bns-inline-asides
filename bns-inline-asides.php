@@ -70,7 +70,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @date    April 3, 2013
  * Added code block termination comments
  *
- * @todo Add new type: Hat Tip (use a top hat as a background image?)
+ * @todo Add Hat Tip graphic (a top hat image?)
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */

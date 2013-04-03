@@ -1,6 +1,6 @@
 /**
  * This file is part of BNS Inline Asides plugin
- * Last revised at version 0.8.1
+ * Last revised at version 1.0
  *
  * Copyright 2011-2013  Edward Caissie  (email : edward.caissie@gmail.com)
  *
@@ -21,6 +21,10 @@
  *      Free Software Foundation, Inc.
  *      51 Franklin St, Fifth Floor
  *      Boston, MA  02110-1301  USA
+ *
+ * @version 1.0
+ * @date    April 3, 2013
+ * Added style definitions for "Hat Tip" type
  */
 
 span.close-aside, span.open-aside {
@@ -88,6 +92,18 @@ blockquote.aside.footnote ol {
 blockquote.aside.nb, blockquote.aside.nota-bene {
     background-color: #c0c0c0;
     font-style: italic;
+}
+
+/** Type: Hat Tip */
+.open-aside.hat-tip {}
+.bnsia.aside.hat-tip,
+blockquote.aside.hat-tip {
+    /**
+     * Black text on a transparent background with a non-repeating hat graphic
+     * for added emphasis
+     */
+    background: url('hat.png') no-repeat left transparent;
+    color: #000;
 }
 
 /** ------------------------------------------------------------------------- */
