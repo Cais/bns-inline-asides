@@ -118,6 +118,11 @@ class BNS_Inline_Asides {
      * @uses    wp_enqueue_style
      * @uses    (CONSTANT) BNSIA_URL
      * @uses    (CONSTANT) BNSIA_PATH
+     *
+     * @version 1.0
+     * @date    April 3, 2013
+     * Adjusted path to scripts and styles files
+     * Removed direct jQuery enqueue
      */
     function BNSIA_Scripts_and_Styles() {
         /** Call the wp-admin plugin code */
@@ -125,11 +130,11 @@ class BNS_Inline_Asides {
         /** @var $bnsia_data - holds the plugin header data */
         $bnsia_data = get_plugin_data( __FILE__ );
 
-        /* Enqueue Scripts */
-        wp_enqueue_script( 'jquery' );
+        /** Enqueue Scripts */
+        /** Enqueue toggling script which calls jQuery as a dependency */
         wp_enqueue_script( 'bnsia_script', BNSIA_URL . 'js/bnsia-script.js', array( 'jquery' ), $bnsia_data['Version'] );
 
-        /* Enqueue Style Sheets */
+        /** Enqueue Style Sheets */
         wp_enqueue_style( 'BNSIA-Style', BNSIA_URL . 'bnsia-style.css', array(), $bnsia_data['Version'], 'screen' );
         if ( is_readable( BNSIA_PATH . 'bnsia-custom-types.css' ) ) {
             wp_enqueue_style( 'BNSIA-Custom-Types', BNSIA_URL . 'bnsia-custom-types.css', array(), $bnsia_data['Version'], 'screen' );
