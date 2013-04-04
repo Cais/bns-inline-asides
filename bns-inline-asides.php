@@ -163,6 +163,10 @@ class BNS_Inline_Asides {
      * @date    January 4, 2013
      * Moved JavaScript into its own file and pass the element variable via
      * wp_localize_script
+     *
+     * @version 1.0
+     * @date    Rat Day, 2013
+     * Added missing `bnsia` class to theme elements other than default
      */
     function bns_inline_asides_shortcode( $atts, $content = null ) {
         extract(
@@ -215,7 +219,7 @@ class BNS_Inline_Asides {
         if ( $this->bnsia_theme_element( $bnsia_element ) == '' ) {
             $return = $toggle_markup . '<div class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</div>';
         } else {
-            $return = $toggle_markup . '<' . $this->bnsia_theme_element( $bnsia_element ) . ' class="aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . $this->bnsia_theme_element( $bnsia_element ) . '>';
+            $return = $toggle_markup . '<' . $this->bnsia_theme_element( $bnsia_element ) . ' class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . $this->bnsia_theme_element( $bnsia_element ) . '>';
         } /** End if - theme element - null */
 
         /** Grab the element of choice and push it through the JavaScript */
@@ -277,32 +281,27 @@ class BNS_Inline_Asides {
      * @date    November 15, 2012
      * Accept the shortcode $att( 'element' ) and return the value for use with
      * the output strings if it is an accepted HTML tag
+     *
+     * @version 1.0
+     * @date    Rat Day, 2013
+     * Use an array of elements rather than a convoluted if statement
      */
     function bnsia_theme_element( $bnsia_element ) {
 
-        if ( empty( $bnsia_element ) ) {
+        /** @var $accepted_elements - array of block level container elements */
+        $accepted_elements = array( 'aside', 'blockquote', 'code', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre', 'q' );
 
-            /** Default - 'element' is empty or not used */
+        /**
+         * Check if an element has been used: if not, get out; otherwise,
+         * check if the element is accepted or return nothing if it is not.
+         */
+        if ( empty( $bnsia_element ) ) {
             return '';
 
-        } elseif ( /** List accepted HTML tags */
-            'aside'         == $bnsia_element ||
-            'blockquote'    == $bnsia_element ||
-            'code'          == $bnsia_element ||
-            'h1'            == $bnsia_element ||
-            'h2'            == $bnsia_element ||
-            'h3'            == $bnsia_element ||
-            'h4'            == $bnsia_element ||
-            'h5'            == $bnsia_element ||
-            'h6'            == $bnsia_element ||
-            'pre'           == $bnsia_element ||
-            'q'             == $bnsia_element ) {
-
+        } elseif ( in_array( $bnsia_element, $accepted_elements ) ) {
             return $bnsia_element;
 
         } else {
-
-            /** If not an accepted HTML tag return an empty string */
             return '';
 
         } /** End if - empty - element */

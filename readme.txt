@@ -131,6 +131,7 @@ Please stay current with your WordPress installation, your active theme, and you
 * Released April 2013
 * Added code block termination comments
 * Added 'hat.png' image for "Hat Tip" type
+* Added missing `bnsia` class to theme elements other than default
 * Added style definitions for "Hat Tip" type
 * Minor documentation improvements
 * Moved stylesheet into its own directory
@@ -138,6 +139,7 @@ Please stay current with your WordPress installation, your active theme, and you
 * Moved JavaScripts into its own directory
 * Removed direct jQuery enqueue (called as a dependency of 'bnsia-script.js')
 * Removed unused style definitions
+* Use an array of elements rather than a convoluted if statement to sort out if an accepted container is being used
 
 = 0.9 =
 * Released January 2013
