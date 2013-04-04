@@ -137,6 +137,7 @@ Please stay current with your WordPress installation, your active theme, and you
 * Moved stylesheet into its own directory
 * Moved images into their own directory
 * Moved JavaScripts into its own directory
+* Refactored $bnsia_element to simply $element
 * Removed direct jQuery enqueue (called as a dependency of 'bnsia-script.js')
 * Removed unused style definitions
 * Use an array of elements rather than a convoluted if statement to sort out if an accepted container is being used

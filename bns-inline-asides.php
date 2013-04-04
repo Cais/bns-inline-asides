@@ -167,6 +167,7 @@ class BNS_Inline_Asides {
      * @version 1.0
      * @date    Rat Day, 2013
      * Added missing `bnsia` class to theme elements other than default
+     * Refactored $bnsia_element to simply $element
      * Removed global variable $bnsia_element as not used
      */
     function bns_inline_asides_shortcode( $atts, $content = null ) {
@@ -206,8 +207,8 @@ class BNS_Inline_Asides {
             $type_class = ' ' . $type_class;
         } /** End if - type class - aside */
 
-        /** @var $element string - default is null; used as additional css container element */
-        $bnsia_element = $this->replace_spaces( $element );
+        /** @var $element - default is null|empty */
+        $element = $this->replace_spaces( $element );
 
         // The secret sauce ...
         /** @var $show string - used as boolean control */
@@ -216,14 +217,14 @@ class BNS_Inline_Asides {
             . '<span class="open-aside' . $type_class . '">' . sprintf( __( $show ), esc_attr( $type ) ) . '</span>'
             . '<span class="close-aside' . $type_class . '">' . sprintf( __( $hide ), esc_attr( $type ) ) . '</span>
                          </div>';
-        if ( $this->bnsia_theme_element( $bnsia_element ) == '' ) {
+        if ( $this->bnsia_theme_element( $element ) == '' ) {
             $return = $toggle_markup . '<div class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</div>';
         } else {
-            $return = $toggle_markup . '<' . $this->bnsia_theme_element( $bnsia_element ) . ' class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . $this->bnsia_theme_element( $bnsia_element ) . '>';
+            $return = $toggle_markup . '<' . $this->bnsia_theme_element( $element ) . ' class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . $this->bnsia_theme_element( $element ) . '>';
         } /** End if - theme element - null */
 
         /** Grab the element of choice and push it through the JavaScript */
-        wp_localize_script( 'bnsia_script', 'element', $this->bnsia_theme_element( $bnsia_element ) );
+        wp_localize_script( 'bnsia_script', 'element', $this->bnsia_theme_element( $element ) );
 
         return $return;
 
@@ -266,7 +267,7 @@ class BNS_Inline_Asides {
      * @package BNS_Inline_Asides
      * @since   0.6
      *
-     * @param   (global) $bnsia_element - string taken from shortcode $atts( 'element' )
+     * @param   (global) $element - string taken from shortcode $atts( 'element' )
      *
      * @internal The HTML `p` tag is not recommended at this time (version 0.8),
      * especially for text that spans multiple paragraphs
@@ -286,7 +287,7 @@ class BNS_Inline_Asides {
      * @date    Rat Day, 2013
      * Use an array of elements rather than a convoluted if statement
      */
-    function bnsia_theme_element( $bnsia_element ) {
+    function bnsia_theme_element( $element ) {
 
         /** @var $accepted_elements - array of block level container elements */
         $accepted_elements = array( 'aside', 'blockquote', 'code', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre', 'q' );
@@ -295,11 +296,11 @@ class BNS_Inline_Asides {
          * Check if an element has been used: if not, get out; otherwise,
          * check if the element is accepted or return nothing if it is not.
          */
-        if ( empty( $bnsia_element ) ) {
+        if ( empty( $element ) ) {
             return '';
 
-        } elseif ( in_array( $bnsia_element, $accepted_elements ) ) {
-            return $bnsia_element;
+        } elseif ( in_array( $element, $accepted_elements ) ) {
+            return $element;
 
         } else {
             return '';
