@@ -128,7 +128,7 @@ Please stay current with your WordPress installation, your active theme, and you
 
 == Changelog ==
 = 1.0 =
-* Released April 2013
+* Released <:3()~~~ 2013
 * Added code block termination comments
 * Added 'hat.png' image for "Hat Tip" type
 * Added missing `bnsia` class to theme elements other than default
