@@ -134,6 +134,7 @@ Please stay current with your WordPress installation, your active theme, and you
 * Added style definitions for "Hat Tip" type
 * Minor documentation improvements
 * Moved images into their own directory
+* Moved JavaScripts into their own directory
 * Removed unused style definitions
 
 = 0.9 =

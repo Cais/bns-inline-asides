@@ -127,7 +127,7 @@ class BNS_Inline_Asides {
 
         /* Enqueue Scripts */
         wp_enqueue_script( 'jquery' );
-        wp_enqueue_script( 'bnsia_script', BNSIA_URL . 'bnsia-script.js', array( 'jquery' ), $bnsia_data['Version'] );
+        wp_enqueue_script( 'bnsia_script', BNSIA_URL . 'js/bnsia-script.js', array( 'jquery' ), $bnsia_data['Version'] );
 
         /* Enqueue Style Sheets */
         wp_enqueue_style( 'BNSIA-Style', BNSIA_URL . 'bnsia-style.css', array(), $bnsia_data['Version'], 'screen' );
