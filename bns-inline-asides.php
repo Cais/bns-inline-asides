@@ -279,11 +279,13 @@ class BNS_Inline_Asides {
      * the output strings if it is an accepted HTML tag
      */
     function bnsia_theme_element( $bnsia_element ) {
+
         if ( empty( $bnsia_element ) ) {
+
             /** Default - 'element' is empty or not used */
             return '';
-        } elseif (
-            /** List accepted HTML tags */
+
+        } elseif ( /** List accepted HTML tags */
             'aside'         == $bnsia_element ||
             'blockquote'    == $bnsia_element ||
             'code'          == $bnsia_element ||
@@ -299,8 +301,10 @@ class BNS_Inline_Asides {
             return $bnsia_element;
 
         } else {
+
             /** If not an accepted HTML tag return an empty string */
             return '';
+
         } /** End if - empty - element */
 
     } /** End function - theme element */
