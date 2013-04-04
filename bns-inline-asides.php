@@ -167,6 +167,7 @@ class BNS_Inline_Asides {
      * @version 1.0
      * @date    Rat Day, 2013
      * Added missing `bnsia` class to theme elements other than default
+     * Removed global variable $bnsia_element as not used
      */
     function bns_inline_asides_shortcode( $atts, $content = null ) {
         extract(
@@ -205,7 +206,6 @@ class BNS_Inline_Asides {
             $type_class = ' ' . $type_class;
         } /** End if - type class - aside */
 
-        global $bnsia_element;
         /** @var $element string - default is null; used as additional css container element */
         $bnsia_element = $this->replace_spaces( $element );
 
