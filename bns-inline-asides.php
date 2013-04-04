@@ -47,19 +47,6 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * The license for this software can also likely be found here:
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
- * @version 0.7
- * @date    September 19, 2012
- * Implement OOP style class coding
- * Internal documentation updates
- *
- * @version 0.8
- * @date    November 15, 2012
- * Remove `load_plugin_textdomain` as redundant
- *
- * @version 0.8.1
- * @date    December 30, 2012
- * Added Jetpack hack for single view conflict
- *
  * @version 0.9
  * @date    January 4, 2013
  * Removed Jetpack counter-measures hack
@@ -69,8 +56,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @version 1.0
  * @date    April 3, 2013
  * Added code block termination comments
- *
- * @todo Add Hat Tip graphic (a top hat image?)
+ * Added hat graphic for "Hat Tip" type
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
@@ -195,7 +181,7 @@ class BNS_Inline_Asides {
 
         /**
          * @var $type_class string - leaves any end-user capitalization for aesthetics
-         * @var $type string - default: Aside; or defined by end-user
+         * @var $type string - Aside|end-user defined
          */
         $type_class = esc_attr( strtolower( $type ) );
         /** replace whitespace with a single space */
@@ -315,7 +301,7 @@ class BNS_Inline_Asides {
     } /** End function - theme element */
 
 
-} /** Enbd class - inline asides */
+} /** End class - inline asides */
 
 
 /** @var $bns_inline_asides - instantiate the class */

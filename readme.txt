@@ -132,6 +132,7 @@ Please stay current with your WordPress installation, your active theme, and you
 * Added code block termination comments
 * Added 'hat.png' image for "Hat Tip" type
 * Added style definitions for "Hat Tip" type
+* Minor documentation improvements
 * Removed unused style definitions
 
 = 0.9 =
