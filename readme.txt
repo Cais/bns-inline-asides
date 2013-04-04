@@ -133,8 +133,9 @@ Please stay current with your WordPress installation, your active theme, and you
 * Added 'hat.png' image for "Hat Tip" type
 * Added style definitions for "Hat Tip" type
 * Minor documentation improvements
+* Moved stylesheet into its own directory
 * Moved images into their own directory
-* Moved JavaScripts into their own directory
+* Moved JavaScripts into its own directory
 * Removed direct jQuery enqueue (called as a dependency of 'bnsia-script.js')
 * Removed unused style definitions
 

@@ -63,7 +63,7 @@ blockquote.aside.rant {
      * Black text on a red background with a non-repeating flame graphic for
      * added emphasis - Sample Only
      */
-	background: #ff0000 url('images/flame.png') no-repeat left;
+	background: #ff0000 url('../images/flame.png') no-repeat left;
 	color: #000;
 }
 
@@ -102,7 +102,7 @@ blockquote.aside.hat-tip {
      * Black text on a transparent background with a non-repeating hat graphic
      * for added emphasis
      */
-    background: url('images/hat.png') no-repeat left transparent;
+    background: url('../images/hat.png') no-repeat left transparent;
     color: #000;
 }
 
