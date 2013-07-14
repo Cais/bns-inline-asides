@@ -4,7 +4,7 @@ Donate link: http://buynowshop.com
 Tags: posts, pages, content, shortcode, plugin-only
 Requires at least: 3.0
 Tested up to: 3.6
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GNU General Public License v2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -127,6 +127,10 @@ Sample content taken from the "Readability" post of the Theme Unit Test data fou
 Please stay current with your WordPress installation, your active theme, and your plugins.
 
 == Changelog ==
+= 1.0.1 =
+* Released July 2013
+* Added new aside type: Correction
+
 = 1.0 =
 * Released <:3()~~~ 2013
 * Added code block termination comments

@@ -3,7 +3,7 @@
 Plugin Name: BNS Inline Asides
 Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
 Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
-Version: 1.0
+Version: 1.0.1
 Text Domain: bns-ia
 Author: Edward Caissie
 Author URI: http://edwardcaissie.com/
@@ -18,7 +18,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * emphasis by leveraging a style element from the active theme.
  *
  * @package     BNS_Inline_Asides
- * @version     1.0
+ * @version     1.0.1
  *
  * @link        http://buynowshop.com/plugins/bns-inline-asides/
  * @link        https://github.com/Cais/bns-inline-asides/
@@ -57,6 +57,10 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @date    April 3, 2013
  * Added code block termination comments
  * Added hat graphic for "Hat Tip" type
+ *
+ * @version 1.0.1
+ * @date    July 14, 2013
+ * Added check mark graphic and new aside type
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */

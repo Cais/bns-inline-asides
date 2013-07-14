@@ -106,6 +106,20 @@ blockquote.aside.hat-tip {
     color: #000;
 }
 
+/** Type: Correction */
+.open-aside.correction {}
+.bnsia.aside.correction,
+blockquote.aside.correction {
+    /**
+     * Black text on a transparent background with a non-repeating checkbox
+     * graphic for added emphasis
+     */
+    background: url('../images/checkmark.svg') no-repeat left transparent;
+    background-size: auto 100%;
+    color: #000;
+}
+
+
 /** ------------------------------------------------------------------------- */
 /** BNS Inline Asides Custom Types */
 /**
