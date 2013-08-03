@@ -1,6 +1,6 @@
 /**
  * This file is part of BNS Inline Asides plugin
- * Last revised at version 1.0
+ * Last revised at version 1.0.2
  *
  * Copyright 2011-2013  Edward Caissie  (email : edward.caissie@gmail.com)
  *
@@ -25,6 +25,14 @@
  * @version 1.0
  * @date    April 3, 2013
  * Added style definitions for "Hat Tip" type
+ *
+ * @version 1.0.1
+ * @date    July 2013
+ * Added new aside type: Correction
+ *
+ * @version 1.0.2
+ * @date August 2013
+ * Added new aside type: Update
  */
 
 span.close-aside, span.open-aside {
@@ -115,6 +123,19 @@ blockquote.aside.correction {
      * graphic for added emphasis
      */
     background: url('../images/checkmark.svg') no-repeat left transparent;
+    background-size: auto 100%;
+    color: #000;
+}
+
+/** Type: Update */
+.open-aside.update {}
+.bnsia.aside.update,
+blockquote.aside.update {
+    /**
+     * Black text on a transparent background with a non-repeating checkbox
+     * graphic for added emphasis
+     */
+    background: url('../images/update.png') no-repeat left transparent;
     background-size: auto 100%;
     color: #000;
 }

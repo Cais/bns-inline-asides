@@ -3,7 +3,7 @@
 Plugin Name: BNS Inline Asides
 Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
 Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
-Version: 1.0.1
+Version: 1.0.2
 Text Domain: bns-ia
 Author: Edward Caissie
 Author URI: http://edwardcaissie.com/
@@ -18,7 +18,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * emphasis by leveraging a style element from the active theme.
  *
  * @package     BNS_Inline_Asides
- * @version     1.0.1
+ * @version     1.0.2
  *
  * @link        http://buynowshop.com/plugins/bns-inline-asides/
  * @link        https://github.com/Cais/bns-inline-asides/
@@ -61,11 +61,16 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @version 1.0.1
  * @date    July 14, 2013
  * Added check mark graphic and new aside type
+ *
+ * @version 1.0.2
+ * @date    August 2013
+ * Added update graphic for new update type
+ * Added dynamic filter parameter to shortcode attributes
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
 
-// Let's begin ...
+/** Let's begin ... */
 class BNS_Inline_Asides {
     /** Constructor */
     function __construct(){
@@ -173,6 +178,10 @@ class BNS_Inline_Asides {
      * Added missing `bnsia` class to theme elements other than default
      * Refactored $bnsia_element to simply $element
      * Removed global variable $bnsia_element as not used
+     *
+     * @version 1.0.2
+     * @date    August 3, 2013
+     * Added dynamic filter parameter
      */
     function bns_inline_asides_shortcode( $atts, $content = null ) {
         extract(
@@ -184,7 +193,7 @@ class BNS_Inline_Asides {
                     'hide'      => 'To hide the <em>%s</em> click here.',
                     'status'    => 'open',
                 ),
-                $atts )
+                $atts, 'aside' )
         );
 
         /** clean up shortcode properties */
