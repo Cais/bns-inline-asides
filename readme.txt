@@ -128,7 +128,7 @@ Please stay current with your WordPress installation, your active theme, and you
 
 == Changelog ==
 = 1.0.3 =
-* Released ...
+* Released December 2013
 * Code reformatting to better reflect WordPress Coding Standards (see https://gist.github.com/Cais/8023722)
 * Added functional option to put `bnsia-custom-types.css` in `/wp-content/` folder
 * Code reductions (see `replace_spaces` usage)
