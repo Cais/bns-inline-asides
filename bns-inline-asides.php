@@ -17,15 +17,15 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * This plugin will allow you to style sections of post content with added
  * emphasis by leveraging a style element from the active theme.
  *
- * @package     BNS_Inline_Asides
- * @version     1.0.3
+ * @package        BNS_Inline_Asides
+ * @version        1.0.3
  *
- * @link        http://buynowshop.com/plugins/bns-inline-asides/
- * @link        https://github.com/Cais/bns-inline-asides/
- * @link        http://wordpress.org/extend/plugins/bns-inline-asides/
+ * @link           http://buynowshop.com/plugins/bns-inline-asides/
+ * @link           https://github.com/Cais/bns-inline-asides/
+ * @link           http://wordpress.org/extend/plugins/bns-inline-asides/
  *
- * @author      Edward Caissie <edward.caissie@gmail.com>
- * @copyright   Copyright (c) 2011-2013, Edward Caissie
+ * @author         Edward Caissie <edward.caissie@gmail.com>
+ * @copyright      Copyright (c) 2011-2013, Edward Caissie
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License version 2, as published by the
@@ -47,22 +47,22 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * The license for this software can also likely be found here:
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
- * @version     1.0
- * @date        April 3, 2013
+ * @version        1.0
+ * @date           April 3, 2013
  * Added code block termination comments
  * Added hat graphic for "Hat Tip" type
  *
- * @version     1.0.1
- * @date        July 14, 2013
+ * @version        1.0.1
+ * @date           July 14, 2013
  * Added check mark graphic and new aside type
  *
- * @version     1.0.2
- * @date        August 2013
+ * @version        1.0.2
+ * @date           August 2013
  * Added update graphic for new update type
  * Added dynamic filter parameter to shortcode attributes
  *
- * @version		1.0.3
- * @date		December 2013
+ * @version        1.0.3
+ * @date           December 2013
  * Code reformatting to better reflect WordPress Coding Standards (see https://gist.github.com/Cais/8023722)
  */
 
@@ -121,21 +121,23 @@ class BNS_Inline_Asides {
 	 *
 	 * Adds plugin stylesheet and allows for custom stylesheet to be added by end-user.
 	 *
-	 * @package            BNS_Inline_Asides
-	 * @since              0.4.1
+	 * @package                BNS_Inline_Asides
+	 * @since                  0.4.1
 	 *
-	 * @uses               wp_enqueue_script
-	 * @uses               wp_enqueue_style
-	 * @uses    (CONSTANT) BNSIA_URL
-	 * @uses    (CONSTANT) BNSIA_PATH
+	 * @uses    (CONSTANT)     WP_CONTENT_DIR
+	 * @uses                   content_url
+	 * @uses                   wp_enqueue_script
+	 * @uses                   wp_enqueue_style
+	 * @uses    (CONSTANT)     BNSIA_URL
+	 * @uses    (CONSTANT)     BNSIA_PATH
 	 *
-	 * @version            1.0
-	 * @date               April 3, 2013
+	 * @version                1.0
+	 * @date                   April 3, 2013
 	 * Adjusted path to scripts and styles files
 	 * Removed direct jQuery enqueue
 	 *
-	 * @version				1.0.3
-	 * @date				December 28, 2013
+	 * @version                1.0.3
+	 * @date                   December 28, 2013
 	 * Added functional option to put `bnsia-custom-types.css` in `/wp-content/` folder
 	 */
 	function BNSIA_Scripts_and_Styles() {
