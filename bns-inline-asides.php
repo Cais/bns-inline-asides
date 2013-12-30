@@ -169,33 +169,38 @@ class BNS_Inline_Asides {
 	/**
 	 * BNS Inline Asides Shortcode
 	 *
-	 * @package BNS_Inline_Asides
-	 * @since   0.1
+	 * @package    BNS_Inline_Asides
+	 * @since      0.1
 	 *
 	 * @param        $atts    - shortcode attributes
 	 * @param   null $content - the content
 	 *
-	 * @uses    bnsia_theme_element
-	 * @uses    do_shortcode
-	 * @uses    shortcode_atts
-	 * @uses    wp_localize_script
+	 * @uses       BNS_Inline_Asides::replace_spaces
+	 * @uses       BNS_Inline_Asides::bnsia_theme_element
+	 * @uses       do_shortcode
+	 * @uses       shortcode_atts
+	 * @uses       wp_localize_script
 	 *
 	 * @return  string
 	 *
-	 * @version 0.9
-	 * @date    January 4, 2013
+	 * @version    0.9
+	 * @date       January 4, 2013
 	 * Moved JavaScript into its own file and pass the element variable via
 	 * wp_localize_script
 	 *
-	 * @version 1.0
-	 * @date    Rat Day, 2013
+	 * @version    1.0
+	 * @date       Rat Day, 2013
 	 * Added missing `bnsia` class to theme elements other than default
 	 * Refactored $bnsia_element to simply $element
 	 * Removed global variable $bnsia_element as not used
 	 *
-	 * @version 1.0.2
-	 * @date    August 3, 2013
+	 * @version    1.0.2
+	 * @date       August 3, 2013
 	 * Added dynamic filter parameter
+	 *
+	 * @version    1.0.3
+	 * @date       December 30, 2013
+	 * Code reductions (see `replace_spaces` usage)
 	 */
 	function bns_inline_asides_shortcode( $atts, $content = null ) {
 		extract(
@@ -222,11 +227,7 @@ class BNS_Inline_Asides {
 		 * @var $type_class string - leaves any end-user capitalization for aesthetics
 		 * @var $type       string - Aside|end-user defined
 		 */
-		$type_class = esc_attr( strtolower( $type ) );
-		/** replace whitespace with a single space */
-		$type_class = preg_replace( '/\s\s+/', ' ', $type_class );
-		/** replace space with a hyphen to create nice CSS classes */
-		$type_class = preg_replace( '/\\040/', '-', $type_class );
+		$type_class = $this->replace_spaces( $type );
 
 		/** no need to duplicate the default 'aside' class */
 		if ( $type_class == 'aside' ) {
