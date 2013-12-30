@@ -3,7 +3,7 @@
 Plugin Name: BNS Inline Asides
 Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
 Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
-Version: 1.0.2
+Version: 1.0.3
 Text Domain: bns-ia
 Author: Edward Caissie
 Author URI: http://edwardcaissie.com/
@@ -18,7 +18,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * emphasis by leveraging a style element from the active theme.
  *
  * @package     BNS_Inline_Asides
- * @version     1.0.2
+ * @version     1.0.3
  *
  * @link        http://buynowshop.com/plugins/bns-inline-asides/
  * @link        https://github.com/Cais/bns-inline-asides/
@@ -47,283 +47,299 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * The license for this software can also likely be found here:
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
- * @version 0.9
- * @date    January 4, 2013
- * Removed Jetpack counter-measures hack
- * Moved JavaScript from inline to its own enqueued file
- * Implemented `wp_localize_script` to maintain the dynamic element
- *
- * @version 1.0
- * @date    April 3, 2013
+ * @version     1.0
+ * @date        April 3, 2013
  * Added code block termination comments
  * Added hat graphic for "Hat Tip" type
  *
- * @version 1.0.1
- * @date    July 14, 2013
+ * @version     1.0.1
+ * @date        July 14, 2013
  * Added check mark graphic and new aside type
  *
- * @version 1.0.2
- * @date    August 2013
+ * @version     1.0.2
+ * @date        August 2013
  * Added update graphic for new update type
  * Added dynamic filter parameter to shortcode attributes
+ *
+ * @version		1.0.3
+ * @date		December 2013
+ * Code reformatting to better reflect WordPress Coding Standards (see https://gist.github.com/Cais/8023722)
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
 
 /** Let's begin ... */
 class BNS_Inline_Asides {
-    /** Constructor */
-    function __construct(){
-        /** Define some constants to save some keying */
-        define( 'BNSIA_URL', plugin_dir_url( __FILE__ ) );
-        define( 'BNSIA_PATH', plugin_dir_path( __FILE__ ) );
+	/** Constructor */
+	function __construct() {
+		/** Define some constants to save some keying */
+		define( 'BNSIA_URL', plugin_dir_url( __FILE__ ) );
+		define( 'BNSIA_PATH', plugin_dir_path( __FILE__ ) );
 
-        /**
-         * Check installed WordPress version for compatibility
-         *
-         * @package     BNS_Inline_Asides
-         * @since       0.1
-         *
-         * @internal    WordPress 3.0 required in reference to home_url()
-         *
-         * @uses        (global) $wp_version
-         *
-         * @version     0.6
-         * @date        November 21, 2011
-         * Re-write to be i18n compatible
-         */
-        global $wp_version;
-        $exit_ver_msg = __( 'BNS Inline Asides requires a minimum of WordPress 3.0, <a href="http://codex.wordpress.org/Upgrading_WordPress">Please Update!</a>', 'bns-ia' );
-        if ( version_compare( $wp_version, "3.0", "<" ) ) {
-            exit ( $exit_ver_msg );
-        } /** End if - version compare */
+		/**
+		 * Check installed WordPress version for compatibility
+		 *
+		 * @package              BNS_Inline_Asides
+		 * @since                0.1
+		 *
+		 * @internal             WordPress 3.0 required in reference to home_url()
+		 *
+		 * @uses        (global) $wp_version
+		 *
+		 * @version              0.6
+		 * @date                 November 21, 2011
+		 * Re-write to be i18n compatible
+		 */
+		global $wp_version;
+		$exit_ver_msg = __( 'BNS Inline Asides requires a minimum of WordPress 3.0, <a href="http://codex.wordpress.org/Upgrading_WordPress">Please Update!</a>', 'bns-ia' );
+		if ( version_compare( $wp_version, "3.0", "<" ) ) {
+			exit ( $exit_ver_msg );
+		}
+		/** End if - version compare */
 
-        /** Enqueue Scripts and Styles */
-        add_action( 'wp_enqueue_scripts', array( $this, 'BNSIA_Scripts_and_Styles' ) );
+		/** Enqueue Scripts and Styles */
+		add_action( 'wp_enqueue_scripts', array( $this, 'BNSIA_Scripts_and_Styles' ) );
 
-        /**
-         * Add Shortcode
-         * @example [aside]text[/aside]
-         * @internal default type="Aside"
-         * @internal default element='' (an empty string)
-         * @internal default status="open"
-         * @internal default show="To see the <em>%s</em> click here."
-         * @internal default hide="To hide the <em>%s</em> click here."
-         */
-        add_shortcode( 'aside', array( $this, 'bns_inline_asides_shortcode' ) );
+		/**
+		 * Add Shortcode
+		 * @example  [aside]text[/aside]
+		 * @internal default type="Aside"
+		 * @internal default element='' (an empty string)
+		 * @internal default status="open"
+		 * @internal default show="To see the <em>%s</em> click here."
+		 * @internal default hide="To hide the <em>%s</em> click here."
+		 */
+		add_shortcode( 'aside', array( $this, 'bns_inline_asides_shortcode' ) );
 
-    } /** End function - constructor */
+	}
 
-
-    /**
-     * Enqueue Plugin Scripts and Styles
-     *
-     * Adds plugin stylesheet and allows for custom stylesheet to be added by end-user.
-     *
-     * @package BNS_Inline_Asides
-     * @since   0.4.1
-     *
-     * @uses    wp_enqueue_script
-     * @uses    wp_enqueue_style
-     * @uses    (CONSTANT) BNSIA_URL
-     * @uses    (CONSTANT) BNSIA_PATH
-     *
-     * @version 1.0
-     * @date    April 3, 2013
-     * Adjusted path to scripts and styles files
-     * Removed direct jQuery enqueue
-     */
-    function BNSIA_Scripts_and_Styles() {
-        /** Call the wp-admin plugin code */
-        require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-        /** @var $bnsia_data - holds the plugin header data */
-        $bnsia_data = get_plugin_data( __FILE__ );
-
-        /** Enqueue Scripts */
-        /** Enqueue toggling script which calls jQuery as a dependency */
-        wp_enqueue_script( 'bnsia_script', BNSIA_URL . 'js/bnsia-script.js', array( 'jquery' ), $bnsia_data['Version'] );
-
-        /** Enqueue Style Sheets */
-        wp_enqueue_style( 'BNSIA-Style', BNSIA_URL . 'css/bnsia-style.css', array(), $bnsia_data['Version'], 'screen' );
-        if ( is_readable( BNSIA_PATH . 'bnsia-custom-types.css' ) ) {
-            wp_enqueue_style( 'BNSIA-Custom-Types', BNSIA_URL . 'bnsia-custom-types.css', array(), $bnsia_data['Version'], 'screen' );
-        } /** End if - is readable */
-
-    } /** End function - scripts and styles */
+	/** End function - constructor */
 
 
-    /**
-     * BNS Inline Asides Shortcode
-     *
-     * @package BNS_Inline_Asides
-     * @since   0.1
-     *
-     * @param   $atts - shortcode attributes
-     * @param   null $content - the content
-     *
-     * @uses    bnsia_theme_element
-     * @uses    do_shortcode
-     * @uses    shortcode_atts
-     * @uses    wp_localize_script
-     *
-     * @return  string
-     *
-     * @version 0.9
-     * @date    January 4, 2013
-     * Moved JavaScript into its own file and pass the element variable via
-     * wp_localize_script
-     *
-     * @version 1.0
-     * @date    Rat Day, 2013
-     * Added missing `bnsia` class to theme elements other than default
-     * Refactored $bnsia_element to simply $element
-     * Removed global variable $bnsia_element as not used
-     *
-     * @version 1.0.2
-     * @date    August 3, 2013
-     * Added dynamic filter parameter
-     */
-    function bns_inline_asides_shortcode( $atts, $content = null ) {
-        extract(
-            shortcode_atts(
-                array(
-                    'type'      => 'Aside',
-                    'element'   => '',
-                    'show'      => 'To see the <em>%s</em> click here.',
-                    'hide'      => 'To hide the <em>%s</em> click here.',
-                    'status'    => 'open',
-                ),
-                $atts, 'aside' )
-        );
+	/**
+	 * Enqueue Plugin Scripts and Styles
+	 *
+	 * Adds plugin stylesheet and allows for custom stylesheet to be added by end-user.
+	 *
+	 * @package            BNS_Inline_Asides
+	 * @since              0.4.1
+	 *
+	 * @uses               wp_enqueue_script
+	 * @uses               wp_enqueue_style
+	 * @uses    (CONSTANT) BNSIA_URL
+	 * @uses    (CONSTANT) BNSIA_PATH
+	 *
+	 * @version            1.0
+	 * @date               April 3, 2013
+	 * Adjusted path to scripts and styles files
+	 * Removed direct jQuery enqueue
+	 */
+	function BNSIA_Scripts_and_Styles() {
+		/** Call the wp-admin plugin code */
+		require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		/** @var $bnsia_data - holds the plugin header data */
+		$bnsia_data = get_plugin_data( __FILE__ );
 
-        /** clean up shortcode properties */
-        /** @var $status string - used as toggle switch */
-        $status = esc_attr( strtolower( $status ) );
-        if ( $status != "open" ) {
-            $status = "closed";
-        } /** End if - status is not open */
+		/** Enqueue Scripts */
+		/** Enqueue toggling script which calls jQuery as a dependency */
+		wp_enqueue_script( 'bnsia_script', BNSIA_URL . 'js/bnsia-script.js', array( 'jquery' ), $bnsia_data['Version'] );
 
-        /**
-         * @var $type_class string - leaves any end-user capitalization for aesthetics
-         * @var $type string - Aside|end-user defined
-         */
-        $type_class = esc_attr( strtolower( $type ) );
-        /** replace whitespace with a single space */
-        $type_class = preg_replace( '/\s\s+/', ' ', $type_class );
-        /** replace space with a hyphen to create nice CSS classes */
-        $type_class = preg_replace( '/\\040/', '-', $type_class );
+		/** Enqueue Style Sheets */
+		wp_enqueue_style( 'BNSIA-Style', BNSIA_URL . 'css/bnsia-style.css', array(), $bnsia_data['Version'], 'screen' );
+		if ( is_readable( BNSIA_PATH . 'bnsia-custom-types.css' ) ) {
+			wp_enqueue_style( 'BNSIA-Custom-Types', BNSIA_URL . 'bnsia-custom-types.css', array(), $bnsia_data['Version'], 'screen' );
+		}
+		/** End if - is readable */
 
-        /** no need to duplicate the default 'aside' class */
-        if ( $type_class == 'aside' ) {
-            $type_class = '';
-        } else {
-            $type_class = ' ' . $type_class;
-        } /** End if - type class - aside */
+	}
 
-        /** @var $element - default is null|empty */
-        $element = $this->replace_spaces( $element );
+	/** End function - scripts and styles */
 
-        // The secret sauce ...
-        /** @var $show string - used as boolean control */
-        /** @var $hide string - used as boolean control */
-        $toggle_markup = '<div class="aside-toggler ' . $status . '">'
-            . '<span class="open-aside' . $type_class . '">' . sprintf( __( $show ), esc_attr( $type ) ) . '</span>'
-            . '<span class="close-aside' . $type_class . '">' . sprintf( __( $hide ), esc_attr( $type ) ) . '</span>
+
+	/**
+	 * BNS Inline Asides Shortcode
+	 *
+	 * @package BNS_Inline_Asides
+	 * @since   0.1
+	 *
+	 * @param        $atts    - shortcode attributes
+	 * @param   null $content - the content
+	 *
+	 * @uses    bnsia_theme_element
+	 * @uses    do_shortcode
+	 * @uses    shortcode_atts
+	 * @uses    wp_localize_script
+	 *
+	 * @return  string
+	 *
+	 * @version 0.9
+	 * @date    January 4, 2013
+	 * Moved JavaScript into its own file and pass the element variable via
+	 * wp_localize_script
+	 *
+	 * @version 1.0
+	 * @date    Rat Day, 2013
+	 * Added missing `bnsia` class to theme elements other than default
+	 * Refactored $bnsia_element to simply $element
+	 * Removed global variable $bnsia_element as not used
+	 *
+	 * @version 1.0.2
+	 * @date    August 3, 2013
+	 * Added dynamic filter parameter
+	 */
+	function bns_inline_asides_shortcode( $atts, $content = null ) {
+		extract(
+			shortcode_atts(
+				array(
+					'type'    => 'Aside',
+					'element' => '',
+					'show'    => 'To see the <em>%s</em> click here.',
+					'hide'    => 'To hide the <em>%s</em> click here.',
+					'status'  => 'open',
+				),
+				$atts, 'aside' )
+		);
+
+		/** clean up shortcode properties */
+		/** @var $status string - used as toggle switch */
+		$status = esc_attr( strtolower( $status ) );
+		if ( $status != "open" ) {
+			$status = "closed";
+		}
+		/** End if - status is not open */
+
+		/**
+		 * @var $type_class string - leaves any end-user capitalization for aesthetics
+		 * @var $type       string - Aside|end-user defined
+		 */
+		$type_class = esc_attr( strtolower( $type ) );
+		/** replace whitespace with a single space */
+		$type_class = preg_replace( '/\s\s+/', ' ', $type_class );
+		/** replace space with a hyphen to create nice CSS classes */
+		$type_class = preg_replace( '/\\040/', '-', $type_class );
+
+		/** no need to duplicate the default 'aside' class */
+		if ( $type_class == 'aside' ) {
+			$type_class = '';
+		} else {
+			$type_class = ' ' . $type_class;
+		}
+		/** End if - type class - aside */
+
+		/** @var $element - default is null|empty */
+		$element = $this->replace_spaces( $element );
+
+		// The secret sauce ...
+		/** @var $show string - used as boolean control */
+		/** @var $hide string - used as boolean control */
+		$toggle_markup = '<div class="aside-toggler ' . $status . '">'
+			. '<span class="open-aside' . $type_class . '">' . sprintf( __( $show ), esc_attr( $type ) ) . '</span>'
+			. '<span class="close-aside' . $type_class . '">' . sprintf( __( $hide ), esc_attr( $type ) ) . '</span>
                          </div>';
-        if ( $this->bnsia_theme_element( $element ) == '' ) {
-            $return = $toggle_markup . '<div class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</div>';
-        } else {
-            $return = $toggle_markup . '<' . $this->bnsia_theme_element( $element ) . ' class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . $this->bnsia_theme_element( $element ) . '>';
-        } /** End if - theme element - null */
+		if ( $this->bnsia_theme_element( $element ) == '' ) {
+			$return = $toggle_markup . '<div class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</div>';
+		} else {
+			$return = $toggle_markup . '<' . $this->bnsia_theme_element( $element ) . ' class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . $this->bnsia_theme_element( $element ) . '>';
+		}
+		/** End if - theme element - null */
 
-        /** Grab the element of choice and push it through the JavaScript */
-        wp_localize_script( 'bnsia_script', 'element', $this->bnsia_theme_element( $element ) );
+		/** Grab the element of choice and push it through the JavaScript */
+		wp_localize_script( 'bnsia_script', 'element', $this->bnsia_theme_element( $element ) );
 
-        return $return;
+		return $return;
 
-    } /** End function - shortcode */
+	}
 
-
-    /**
-     * Replace Spaces
-     * Takes a string and replaces the spaces with a single hyphen by default
-     *
-     * @package BNS_Inline_asides
-     * @since   0.8
-     *
-     * @internal Original code from Opus Primus by Edward "Cais" Caissie ( mailto:edward.caissie@gmail.com )
-     *
-     * @param   string $text
-     * @param   string $replacement
-     *
-     * @return  string - class
-     */
-    function replace_spaces( $text, $replacement='-' ) {
-        /** @var $new_text - initial text set to lower case */
-        $new_text = esc_attr( strtolower( $text ) );
-        /** replace whitespace with a single space */
-        $new_text = preg_replace( '/\s\s+/', ' ', $new_text );
-        /** replace space with a hyphen to create nice CSS classes */
-        $new_text = preg_replace( '/\\040/', $replacement, $new_text );
-
-        /** Return the string with spaces replaced by the replacement variable */
-        return $new_text;
-
-    } /** End function - replace spaces */
+	/** End function - shortcode */
 
 
-    /**
-     * BNSIA Theme Element
-     * Plugin currently supports the following HTML tags: aside, blockquote,
-     * code, h1 through h6, pre, and q; or uses the default <div class = bnsia>
-     *
-     * @package BNS_Inline_Asides
-     * @since   0.6
-     *
-     * @param   (global) $element - string taken from shortcode $atts( 'element' )
-     *
-     * @internal The HTML `p` tag is not recommended at this time (version 0.8),
-     * especially for text that spans multiple paragraphs
-     *
-     * @return  string - accepted HTML tag | empty
-     *
-     * @version 0.6.1
-     * @date    November 22, 2011
-     * Corrected issue with conditional - Fatal error: Cannot re-declare bnsia_theme_element()
-     *
-     * @version 0.8
-     * @date    November 15, 2012
-     * Accept the shortcode $att( 'element' ) and return the value for use with
-     * the output strings if it is an accepted HTML tag
-     *
-     * @version 1.0
-     * @date    Rat Day, 2013
-     * Use an array of elements rather than a convoluted if statement
-     */
-    function bnsia_theme_element( $element ) {
+	/**
+	 * Replace Spaces
+	 * Takes a string and replaces the spaces with a single hyphen by default
+	 *
+	 * @package  BNS_Inline_asides
+	 * @since    0.8
+	 *
+	 * @internal Original code from Opus Primus by Edward "Cais" Caissie ( mailto:edward.caissie@gmail.com )
+	 *
+	 * @param   string $text
+	 * @param   string $replacement
+	 *
+	 * @return  string - class
+	 */
+	function replace_spaces( $text, $replacement = '-' ) {
+		/** @var $new_text - initial text set to lower case */
+		$new_text = esc_attr( strtolower( $text ) );
+		/** replace whitespace with a single space */
+		$new_text = preg_replace( '/\s\s+/', ' ', $new_text );
+		/** replace space with a hyphen to create nice CSS classes */
+		$new_text = preg_replace( '/\\040/', $replacement, $new_text );
 
-        /** @var $accepted_elements - array of block level container elements */
-        $accepted_elements = array( 'aside', 'blockquote', 'code', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre', 'q' );
+		/** Return the string with spaces replaced by the replacement variable */
 
-        /**
-         * Check if an element has been used: if not, get out; otherwise,
-         * check if the element is accepted or return nothing if it is not.
-         */
-        if ( empty( $element ) ) {
-            return '';
+		return $new_text;
 
-        } elseif ( in_array( $element, $accepted_elements ) ) {
-            return $element;
+	}
 
-        } else {
-            return '';
-
-        } /** End if - empty - element */
-
-    } /** End function - theme element */
+	/** End function - replace spaces */
 
 
-} /** End class - inline asides */
+	/**
+	 * BNSIA Theme Element
+	 * Plugin currently supports the following HTML tags: aside, blockquote,
+	 * code, h1 through h6, pre, and q; or uses the default <div class = bnsia>
+	 *
+	 * @package  BNS_Inline_Asides
+	 * @since    0.6
+	 *
+	 * @param    (global) $element - string taken from shortcode $atts( 'element' )
+	 *
+	 * @internal The HTML `p` tag is not recommended at this time (version 0.8),
+	 * especially for text that spans multiple paragraphs
+	 *
+	 * @return  string - accepted HTML tag | empty
+	 *
+	 * @version  0.6.1
+	 * @date     November 22, 2011
+	 * Corrected issue with conditional - Fatal error: Cannot re-declare bnsia_theme_element()
+	 *
+	 * @version  0.8
+	 * @date     November 15, 2012
+	 * Accept the shortcode $att( 'element' ) and return the value for use with
+	 * the output strings if it is an accepted HTML tag
+	 *
+	 * @version  1.0
+	 * @date     Rat Day, 2013
+	 * Use an array of elements rather than a convoluted if statement
+	 */
+	function bnsia_theme_element( $element ) {
+
+		/** @var $accepted_elements - array of block level container elements */
+		$accepted_elements = array( 'aside', 'blockquote', 'code', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre', 'q' );
+
+		/**
+		 * Check if an element has been used: if not, get out; otherwise,
+		 * check if the element is accepted or return nothing if it is not.
+		 */
+		if ( empty( $element ) ) {
+			return '';
+
+		} elseif ( in_array( $element, $accepted_elements ) ) {
+			return $element;
+
+		} else {
+			return '';
+
+		}
+		/** End if - empty - element */
+
+	}
+	/** End function - theme element */
+
+
+}
+
+/** End class - inline asides */
 
 
 /** @var $bns_inline_asides - instantiate the class */

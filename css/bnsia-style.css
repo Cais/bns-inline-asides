@@ -36,110 +36,135 @@
  */
 
 span.close-aside, span.open-aside {
-  border-bottom: thin solid black;
-  cursor: help;  
-  display: block;
-  text-align: right;
+	border-bottom: thin solid black;
+	cursor: help;
+	display: block;
+	text-align: right;
 }
 
 .aside-toggler.closed .close-aside,
 .aside-toggler.open .open-aside,
 .bnsia.aside.closed,
 blockquote.aside.closed {
-  display:none;
+	display: none;
 }
 
 /** Default - no CSS element chosen */
-.bnsia.aside { padding: 10px; }
+.bnsia.aside {
+	padding: 10px;
+}
 
 /** Remove any background image from blockquote if it exists */
 /** blockquote.aside { background-image: none; } */
 
 /** Pre-Defined BNS Inline Aside Types */
 /** Type: Note */
-.open-aside.note { background-color: #c0c0c0;}
+.open-aside.note {
+	background-color: #c0c0c0;
+}
+
 .bnsia.aside.note,
 blockquote.aside.note {
-    /** Default text color on Light Grey background - Sample Only */
-    background-color: #c0c0c0; }
+	/** Default text color on Light Grey background - Sample Only */
+	background-color: #c0c0c0;
+}
 
 /** Type: Rant */
-.open-aside.rant { background-color: #ff0000; color: #000; }
+.open-aside.rant {
+	background-color: #ff0000;
+	color: #000;
+}
+
 .bnsia.aside.rant,
 blockquote.aside.rant {
-    /**
-     * Black text on a red background with a non-repeating flame graphic for
-     * added emphasis - Sample Only
-     */
+	/**
+	 * Black text on a red background with a non-repeating flame graphic for
+	 * added emphasis - Sample Only
+	 */
 	background: #ff0000 url('../images/flame.png') no-repeat left;
 	color: #000;
 }
 
 /** Type: Changelog */
-.open-aside.changelog { background-color: #c0c0c0; }
+.open-aside.changelog {
+	background-color: #c0c0c0;
+}
+
 .bnsia.aside.changelog,
 blockquote.aside.changelog {
-    /** Default font-family as monospace - Sample Only */
-    font-family: monospace;
+	/** Default font-family as monospace - Sample Only */
+	font-family: monospace;
 }
 
 /** Type: Footnote */
-.open-aside.footnote { background-color: #c0c0c0; }
+.open-aside.footnote {
+	background-color: #c0c0c0;
+}
+
 .bnsia.aside.footnote,
 blockquote.aside.footnote {
-    background-color: #c0c0c0;
+	background-color: #c0c0c0;
 }
+
 .bnsia.aside.footnote ol,
 blockquote.aside.footnote ol {
-    list-style-type: lower-roman;
+	list-style-type: lower-roman;
 }
 
 /** Type: Nota Bene -or- NB */
-.open-aside.nb, .open-aside.nota-bene { background-color: #c0c0c0; }
+.open-aside.nb, .open-aside.nota-bene {
+	background-color: #c0c0c0;
+}
+
 .bnsia.aside.nb, .bnsia.aside.nota-bene,
 blockquote.aside.nb, blockquote.aside.nota-bene {
-    background-color: #c0c0c0;
-    font-style: italic;
+	background-color: #c0c0c0;
+	font-style: italic;
 }
 
 /** Type: Hat Tip */
-.open-aside.hat-tip {}
+.open-aside.hat-tip {
+}
+
 .bnsia.aside.hat-tip,
 blockquote.aside.hat-tip {
-    /**
-     * Black text on a transparent background with a non-repeating hat graphic
-     * for added emphasis
-     */
-    background: url('../images/hat.png') no-repeat left transparent;
-    color: #000;
+	/**
+	 * Black text on a transparent background with a non-repeating hat graphic
+	 * for added emphasis
+	 */
+	background: url('../images/hat.png') no-repeat left transparent;
+	color: #000;
 }
 
 /** Type: Correction */
-.open-aside.correction {}
+.open-aside.correction {
+}
+
 .bnsia.aside.correction,
 blockquote.aside.correction {
-    /**
-     * Black text on a transparent background with a non-repeating checkbox
-     * graphic for added emphasis
-     */
-    background: url('../images/checkmark.svg') no-repeat left transparent;
-    background-size: auto 100%;
-    color: #000;
+	/**
+	 * Black text on a transparent background with a non-repeating checkbox
+	 * graphic for added emphasis
+	 */
+	background: url('../images/checkmark.svg') no-repeat left transparent;
+	background-size: auto 100%;
+	color: #000;
 }
 
 /** Type: Update */
-.open-aside.update {}
-.bnsia.aside.update,
-blockquote.aside.update {
-    /**
-     * Black text on a transparent background with a non-repeating checkbox
-     * graphic for added emphasis
-     */
-    background: url('../images/update.png') no-repeat left transparent;
-    background-size: auto 100%;
-    color: #000;
+.open-aside.update {
 }
 
+.bnsia.aside.update,
+blockquote.aside.update {
+	/**
+	 * Black text on a transparent background with a non-repeating checkbox
+	 * graphic for added emphasis
+	 */
+	background: url('../images/update.png') no-repeat left transparent;
+	background-size: auto 100%;
+	color: #000;
+}
 
 /** ------------------------------------------------------------------------- */
 /** BNS Inline Asides Custom Types */

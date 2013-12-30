@@ -29,14 +29,14 @@
  *      Boston, MA  02110-1301  USA
  */
 
-jQuery( document ).ready( function( $ ) {
-    /** Note: $() will work as an alias for jQuery() inside of this function */
-    $( document ).ready( function() {
-        $( ".aside-toggler" ).click( function() {
-            var element = '';
-            $( this ).toggleClass( "open" ).toggleClass( "closed" ).next( element + ".aside" ).slideToggle( "slow", function() {
-                $( this ).toggleClass( "open" ).toggleClass( "closed" );
-            } );
-        } );
-    } );
-} );
+jQuery(document).ready(function ($) {
+	/** Note: $() will work as an alias for jQuery() inside of this function */
+	$(document).ready(function () {
+		$(".aside-toggler").click(function () {
+			var element = '';
+			$(this).toggleClass("open").toggleClass("closed").next(element + ".aside").slideToggle("slow", function () {
+				$(this).toggleClass("open").toggleClass("closed");
+			});
+		});
+	});
+});
