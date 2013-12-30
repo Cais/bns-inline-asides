@@ -133,6 +133,10 @@ class BNS_Inline_Asides {
 	 * @date               April 3, 2013
 	 * Adjusted path to scripts and styles files
 	 * Removed direct jQuery enqueue
+	 *
+	 * @version				1.0.3
+	 * @date				December 28, 2013
+	 * Added functional option to put `bnsia-custom-types.css` in `/wp-content/` folder
 	 */
 	function BNSIA_Scripts_and_Styles() {
 		/** Call the wp-admin plugin code */
@@ -148,6 +152,10 @@ class BNS_Inline_Asides {
 		wp_enqueue_style( 'BNSIA-Style', BNSIA_URL . 'css/bnsia-style.css', array(), $bnsia_data['Version'], 'screen' );
 		if ( is_readable( BNSIA_PATH . 'bnsia-custom-types.css' ) ) {
 			wp_enqueue_style( 'BNSIA-Custom-Types', BNSIA_URL . 'bnsia-custom-types.css', array(), $bnsia_data['Version'], 'screen' );
+		}
+		/** End if - is readable */
+		if ( is_readable( WP_CONTENT_DIR . '/bnsia-custom-types.css' ) ) {
+			wp_enqueue_style( 'BNSIA-Custom-Types', content_url() . '/bnsia-custom-types.css', array(), $bnsia_data['Version'], 'screen' );
 		}
 		/** End if - is readable */
 
