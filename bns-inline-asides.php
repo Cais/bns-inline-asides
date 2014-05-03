@@ -3,7 +3,7 @@
 Plugin Name: BNS Inline Asides
 Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
 Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
-Version: 1.0.3
+Version: 1.1
 Text Domain: bns-ia
 Author: Edward Caissie
 Author URI: http://edwardcaissie.com/
@@ -18,14 +18,14 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * emphasis by leveraging a style element from the active theme.
  *
  * @package        BNS_Inline_Asides
- * @version        1.0.3
+ * @version        1.1
  *
  * @link           http://buynowshop.com/plugins/bns-inline-asides/
  * @link           https://github.com/Cais/bns-inline-asides/
  * @link           http://wordpress.org/extend/plugins/bns-inline-asides/
  *
  * @author         Edward Caissie <edward.caissie@gmail.com>
- * @copyright      Copyright (c) 2011-2013, Edward Caissie
+ * @copyright      Copyright (c) 2011-2014, Edward Caissie
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License version 2, as published by the
@@ -64,41 +64,58 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * @version        1.0.3
  * @date           December 2013
  * Code reformatting to better reflect WordPress Coding Standards (see https://gist.github.com/Cais/8023722)
+ *
+ * @version        1.1
+ * @date           May 2014
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
 
 /** Let's begin ... */
 class BNS_Inline_Asides {
-	/** Constructor */
+	/**
+	 * Constructor
+	 *
+	 * @package          BNS_Inline_Asides
+	 * @since            0.1
+	 *
+	 * @internal         Requires WordPress version 3.6
+	 * @internal         @uses shortcode_atts - uses optional filter variable
+	 *
+	 * @uses    (global) $wp_version
+	 * @uses             add_action
+	 * @uses             add_shortcode
+	 * @uses             plugin_dir_url
+	 * @uses             plugin_dir_path
+	 *
+	 * @version          1.1
+	 * @date             May 3, 2014
+	 * Corrected textdomain typo
+	 * Updated required version to 3.6 due to use of optional filter variable in `shortcode_atts`
+	 */
 	function __construct() {
 		/** Define some constants to save some keying */
 		define( 'BNSIA_URL', plugin_dir_url( __FILE__ ) );
 		define( 'BNSIA_PATH', plugin_dir_path( __FILE__ ) );
 
 		/**
+		 * WordPress version compatibility
 		 * Check installed WordPress version for compatibility
-		 *
-		 * @package              BNS_Inline_Asides
-		 * @since                0.1
-		 *
-		 * @internal             WordPress 3.0 required in reference to home_url()
-		 *
-		 * @uses        (global) $wp_version
-		 *
-		 * @version              0.6
-		 * @date                 November 21, 2011
-		 * Re-write to be i18n compatible
 		 */
 		global $wp_version;
-		$exit_ver_msg = __( 'BNS Inline Asides requires a minimum of WordPress 3.0, <a href="http://codex.wordpress.org/Upgrading_WordPress">Please Update!</a>', 'bns-ia' );
-		if ( version_compare( $wp_version, "3.0", "<" ) ) {
-			exit ( $exit_ver_msg );
+		$exit_message = __( 'BNS Early Adopter requires WordPress version 3.6 or newer. <a href="http://codex.wordpress.org/Upgrading_WordPress">Please Update!</a>', 'bns-ia' );
+		if ( version_compare( $wp_version, "3.6", "<" ) ) {
+			exit ( $exit_message );
 		}
 		/** End if - version compare */
 
 		/** Enqueue Scripts and Styles */
-		add_action( 'wp_enqueue_scripts', array( $this, 'BNSIA_Scripts_and_Styles' ) );
+		add_action(
+			'wp_enqueue_scripts', array(
+				$this,
+				'BNSIA_Scripts_and_Styles'
+			)
+		);
 
 		/**
 		 * Add Shortcode
@@ -212,7 +229,8 @@ class BNS_Inline_Asides {
 					'hide'    => 'To hide the <em>%s</em> click here.',
 					'status'  => 'open',
 				),
-				$atts, 'aside' )
+				$atts, 'aside'
+			)
 		);
 
 		/** clean up shortcode properties */
@@ -244,8 +262,8 @@ class BNS_Inline_Asides {
 		/** @var $show string - used as boolean control */
 		/** @var $hide string - used as boolean control */
 		$toggle_markup = '<div class="aside-toggler ' . $status . '">'
-			. '<span class="open-aside' . $type_class . '">' . sprintf( __( $show ), esc_attr( $type ) ) . '</span>'
-			. '<span class="close-aside' . $type_class . '">' . sprintf( __( $hide ), esc_attr( $type ) ) . '</span>
+						 . '<span class="open-aside' . $type_class . '">' . sprintf( __( $show ), esc_attr( $type ) ) . '</span>'
+						 . '<span class="close-aside' . $type_class . '">' . sprintf( __( $hide ), esc_attr( $type ) ) . '</span>
                          </div>';
 		if ( $this->bnsia_theme_element( $element ) == '' ) {
 			$return = $toggle_markup . '<div class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</div>';
@@ -326,7 +344,19 @@ class BNS_Inline_Asides {
 	function bnsia_theme_element( $element ) {
 
 		/** @var $accepted_elements - array of block level container elements */
-		$accepted_elements = array( 'aside', 'blockquote', 'code', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'pre', 'q' );
+		$accepted_elements = array(
+			'aside',
+			'blockquote',
+			'code',
+			'h1',
+			'h2',
+			'h3',
+			'h4',
+			'h5',
+			'h6',
+			'pre',
+			'q'
+		);
 
 		/**
 		 * Check if an element has been used: if not, get out; otherwise,

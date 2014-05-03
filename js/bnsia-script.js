@@ -4,7 +4,7 @@
  * @package     BNS_Inline_Asides
  * @since       0.9
  * @author      Edward Caissie <edward.caissie@gmail.com>
- * @copyright   Copyright (c) 2013, Edward Caissie
+ * @copyright   Copyright (c) 2013-2014, Edward Caissie
  *
  * This file is part of BNS Inline Asides plugin
  *
@@ -29,14 +29,14 @@
  *      Boston, MA  02110-1301  USA
  */
 
-jQuery(document).ready(function ($) {
+jQuery( document ).ready( function ( $ ) {
 	/** Note: $() will work as an alias for jQuery() inside of this function */
-	$(document).ready(function () {
-		$(".aside-toggler").click(function () {
+	$( document ).ready( function () {
+		$( ".aside-toggler" ).click( function () {
 			var element = '';
-			$(this).toggleClass("open").toggleClass("closed").next(element + ".aside").slideToggle("slow", function () {
-				$(this).toggleClass("open").toggleClass("closed");
-			});
-		});
-	});
-});
+			$( this ).toggleClass( "open" ).toggleClass( "closed" ).next( element + ".aside" ).slideToggle( "slow", function () {
+				$( this ).toggleClass( "open" ).toggleClass( "closed" );
+			} );
+		} );
+	} );
+} );
