@@ -76,28 +76,27 @@ class BNS_Inline_Asides {
 	/**
 	 * Constructor
 	 *
-	 * @package          BNS_Inline_Asides
-	 * @since            0.1
+	 * @package            BNS_Inline_Asides
+	 * @since              0.1
 	 *
-	 * @internal         Requires WordPress version 3.6
-	 * @internal         @uses shortcode_atts - uses optional filter variable
+	 * @internal           Requires WordPress version 3.6
+	 * @internal           @uses shortcode_atts - uses optional filter variable
 	 *
-	 * @uses    (global) $wp_version
-	 * @uses             add_action
-	 * @uses             add_shortcode
-	 * @uses             plugin_dir_url
-	 * @uses             plugin_dir_path
+	 * @uses    (constant) WP_CONTENT_DIR
+	 * @uses    (global)   $wp_version
+	 * @uses               add_action
+	 * @uses               add_shortcode
+	 * @uses               content_url
+	 * @uses               plugin_dir_url
+	 * @uses               plugin_dir_path
 	 *
-	 * @version          1.1
-	 * @date             May 3, 2014
+	 * @version            1.1
+	 * @date               May 3, 2014
 	 * Corrected textdomain typo
 	 * Updated required version to 3.6 due to use of optional filter variable in `shortcode_atts`
+	 * Define location for BNS plugin customizations
 	 */
 	function __construct() {
-		/** Define some constants to save some keying */
-		define( 'BNSIA_URL', plugin_dir_url( __FILE__ ) );
-		define( 'BNSIA_PATH', plugin_dir_path( __FILE__ ) );
-
 		/**
 		 * WordPress version compatibility
 		 * Check installed WordPress version for compatibility
@@ -108,6 +107,14 @@ class BNS_Inline_Asides {
 			exit ( $exit_message );
 		}
 		/** End if - version compare */
+
+		/** Define some constants to save some keying */
+		define( 'BNSIA_URL', plugin_dir_url( __FILE__ ) );
+		define( 'BNSIA_PATH', plugin_dir_path( __FILE__ ) );
+
+		/** Define location for BNS plugin customizations */
+		define( 'BNS_CUSTOM_PATH', WP_CONTENT_DIR . '/bns-customs/' );
+		define( 'BNS_CUSTOM_URL', content_url( '/bns-customs/' ) );
 
 		/** Enqueue Scripts and Styles */
 		add_action(
@@ -141,12 +148,14 @@ class BNS_Inline_Asides {
 	 * @package                BNS_Inline_Asides
 	 * @since                  0.4.1
 	 *
-	 * @uses    (CONSTANT)     WP_CONTENT_DIR
+	 * @uses    (CONSTANT)     BNS_CUSTOM_PATH
+	 * @uses    (CONSTANT)     BNS_CUSTOM_URL
+	 * @uses    (CONSTANT)     BNSIA_PATH
+	 * @uses    (CONSTANT)     BNSIA_URL
+	 * @uses                   BNS_Inline_Asides::plugin_data
 	 * @uses                   content_url
 	 * @uses                   wp_enqueue_script
 	 * @uses                   wp_enqueue_style
-	 * @uses    (CONSTANT)     BNSIA_URL
-	 * @uses    (CONSTANT)     BNSIA_PATH
 	 *
 	 * @version                1.0
 	 * @date                   April 3, 2013
@@ -156,25 +165,33 @@ class BNS_Inline_Asides {
 	 * @version                1.0.3
 	 * @date                   December 28, 2013
 	 * Added functional option to put `bnsia-custom-types.css` in `/wp-content/` folder
+	 *
+	 * @version                1.1
+	 * @date                   May 4, 2014
+	 * Apply `plugin_data` method
+	 * Moved JavaScript enqueue to footer
+	 * Moved custom CSS folder location to `/wp-content/bns-customs/`
 	 */
 	function BNSIA_Scripts_and_Styles() {
-		/** Call the wp-admin plugin code */
-		require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-		/** @var $bnsia_data - holds the plugin header data */
-		$bnsia_data = get_plugin_data( __FILE__ );
+		/** @var object $bnsia_data - holds the plugin header data */
+		$bnsia_data = $this->plugin_data();
 
 		/** Enqueue Scripts */
 		/** Enqueue toggling script which calls jQuery as a dependency */
-		wp_enqueue_script( 'bnsia_script', BNSIA_URL . 'js/bnsia-script.js', array( 'jquery' ), $bnsia_data['Version'] );
+		wp_enqueue_script( 'bnsia_script', BNSIA_URL . 'js/bnsia-script.js', array( 'jquery' ), $bnsia_data['Version'], true );
 
 		/** Enqueue Style Sheets */
 		wp_enqueue_style( 'BNSIA-Style', BNSIA_URL . 'css/bnsia-style.css', array(), $bnsia_data['Version'], 'screen' );
+
+		/** This location is not recommended as it is not upgrade safe. */
 		if ( is_readable( BNSIA_PATH . 'bnsia-custom-types.css' ) ) {
 			wp_enqueue_style( 'BNSIA-Custom-Types', BNSIA_URL . 'bnsia-custom-types.css', array(), $bnsia_data['Version'], 'screen' );
 		}
 		/** End if - is readable */
-		if ( is_readable( WP_CONTENT_DIR . '/bnsia-custom-types.css' ) ) {
-			wp_enqueue_style( 'BNSIA-Custom-Types', content_url() . '/bnsia-custom-types.css', array(), $bnsia_data['Version'], 'screen' );
+
+		/** This location is recommended as upgrade safe */
+		if ( is_readable( BNS_CUSTOM_PATH . 'bnsia-custom-types.css' ) ) {
+			wp_enqueue_style( 'BNSIA-Custom-Types', BNS_CUSTOM_URL . 'bnsia-custom-types.css', array(), $bnsia_data['Version'], 'screen' );
 		}
 		/** End if - is readable */
 
@@ -234,7 +251,7 @@ class BNS_Inline_Asides {
 		);
 
 		/** clean up shortcode properties */
-		/** @var $status string - used as toggle switch */
+		/** @var string $status - used as toggle switch */
 		$status = esc_attr( strtolower( $status ) );
 		if ( $status != "open" ) {
 			$status = "closed";
@@ -242,8 +259,8 @@ class BNS_Inline_Asides {
 		/** End if - status is not open */
 
 		/**
-		 * @var $type_class string - leaves any end-user capitalization for aesthetics
-		 * @var $type       string - Aside|end-user defined
+		 * @var string $type_class - leaves any end-user capitalization for aesthetics
+		 * @var string $type       - Aside|end-user defined
 		 */
 		$type_class = $this->replace_spaces( $type );
 
@@ -259,8 +276,8 @@ class BNS_Inline_Asides {
 		$element = $this->replace_spaces( $element );
 
 		// The secret sauce ...
-		/** @var $show string - used as boolean control */
-		/** @var $hide string - used as boolean control */
+		/** @var string $show - used as boolean control */
+		/** @var string $hide - used as boolean control */
 		$toggle_markup = '<div class="aside-toggler ' . $status . '">'
 						 . '<span class="open-aside' . $type_class . '">' . sprintf( __( $show ), esc_attr( $type ) ) . '</span>'
 						 . '<span class="close-aside' . $type_class . '">' . sprintf( __( $hide ), esc_attr( $type ) ) . '</span>
@@ -376,6 +393,28 @@ class BNS_Inline_Asides {
 
 	}
 	/** End function - theme element */
+
+
+	/**
+	 * Plugin Data
+	 * Returns the plugin header data as an array
+	 *
+	 * @package    BNS_Inline_Asides
+	 * @since      1.1
+	 *
+	 * @uses       get_plugin_data
+	 *
+	 * @return array
+	 */
+	function plugin_data() {
+		/** Call the wp-admin plugin code */
+		require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+		/** @var $plugin_data - holds the plugin header data */
+		$plugin_data = get_plugin_data( __FILE__ );
+
+		return $plugin_data;
+	}
+	/** End function - plugin data */
 
 
 }

@@ -129,6 +129,7 @@ Please stay current with your WordPress installation, your active theme, and you
 == Changelog ==
 = 1.1 =
 * Released May 2014
+* Move JavaScript enqueue to footer
 * Updated required version to 3.6 due to use of optional filter variable in `shortcode_atts`
 * Updated WordPress version compatibility
 * Updated copyright years
