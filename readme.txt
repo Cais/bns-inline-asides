@@ -130,6 +130,7 @@ Please stay current with your WordPress installation, your active theme, and you
 = 1.2 =
 * Released November 2014
 * Added `_x` i18n implementation to `show` and `hide` default messages
+* Replaced `BNS_Inline_Asides::replace_spaces` with `sanitize_html_class` functionality
 
 = 1.1 =
 * Released May 2014

@@ -198,10 +198,10 @@ class BNS_Inline_Asides {
 	 * @param        $atts    - shortcode attributes
 	 * @param   null $content - the content
 	 *
-	 * @uses       BNS_Inline_Asides::replace_spaces
 	 * @uses       BNS_Inline_Asides::bnsia_theme_element
 	 * @uses       _x
 	 * @uses       do_shortcode
+	 * @uses       sanitize_html_class
 	 * @uses       shortcode_atts
 	 * @uses       wp_localize_script
 	 *
@@ -229,6 +229,7 @@ class BNS_Inline_Asides {
 	 * @version    1.2
 	 * @date       November 3, 2014
 	 * Added `_x` i18n implementation to `show` and `hide` default messages
+	 * Replaced `BNS_Inline_Asides::replace_spaces` with `sanitize_html_class` functionality
 	 */
 	function bns_inline_asides_shortcode( $atts, $content = null ) {
 		extract(
@@ -256,7 +257,7 @@ class BNS_Inline_Asides {
 		 * @var string $type_class - leaves any end-user capitalization for aesthetics
 		 * @var string $type       - Aside|end-user defined
 		 */
-		$type_class = $this->replace_spaces( $type );
+		$type_class = sanitize_html_class( strtolower( $type ), 'aside' );
 
 		/** no need to duplicate the default 'aside' class */
 		if ( $type_class == 'aside' ) {
@@ -267,7 +268,7 @@ class BNS_Inline_Asides {
 		/** End if - type class - aside */
 
 		/** @var $element - default is null|empty */
-		$element = $this->replace_spaces( $element );
+		$element = sanitize_html_class( strtolower( $element ), '' );
 
 		// The secret sauce ...
 		/** @var string $show - used as boolean control */
@@ -297,15 +298,19 @@ class BNS_Inline_Asides {
 	 * Replace Spaces
 	 * Takes a string and replaces the spaces with a single hyphen by default
 	 *
-	 * @package  BNS_Inline_asides
-	 * @since    0.8
+	 * @package     BNS_Inline_asides
+	 * @since       0.8
 	 *
-	 * @internal Original code from Opus Primus by Edward "Cais" Caissie ( mailto:edward.caissie@gmail.com )
+	 * @internal    Original code from Opus Primus by Edward "Cais" Caissie ( mailto:edward.caissie@gmail.com )
 	 *
 	 * @param   string $text
 	 * @param   string $replacement
 	 *
 	 * @return  string - class
+	 *
+	 * @deprecated  1.2
+	 * @date        November 3, 2014
+	 * Replaced with `sanitize_html_class` functionality
 	 */
 	function replace_spaces( $text, $replacement = '-' ) {
 		/** @var $new_text - initial text set to lower case */
