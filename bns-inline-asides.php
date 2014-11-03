@@ -67,8 +67,8 @@ class BNS_Inline_Asides {
 	 * @internal    Requires WordPress version 3.6
 	 * @internal    @uses shortcode_atts - uses optional filter variable
 	 *
-	 * @uses        (constant) WP_CONTENT_DIR
-	 * @uses        (global)   $wp_version
+	 * @uses        (CONSTANT)  WP_CONTENT_DIR
+	 * @uses        (GLOBAL)    $wp_version
 	 * @uses        add_action
 	 * @uses        add_shortcode
 	 * @uses        content_url
@@ -116,7 +116,7 @@ class BNS_Inline_Asides {
 		add_action(
 			'wp_enqueue_scripts', array(
 				$this,
-				'BNSIA_Scripts_and_Styles'
+				'scripts_and_styles'
 			)
 		);
 
@@ -132,7 +132,6 @@ class BNS_Inline_Asides {
 		add_shortcode( 'aside', array( $this, 'bns_inline_asides_shortcode' ) );
 
 	}
-
 	/** End function - constructor */
 
 
@@ -141,34 +140,37 @@ class BNS_Inline_Asides {
 	 *
 	 * Adds plugin stylesheet and allows for custom stylesheet to be added by end-user.
 	 *
-	 * @package                BNS_Inline_Asides
-	 * @since                  0.4.1
+	 * @package BNS_Inline_Asides
+	 * @since   0.4.1
 	 *
-	 * @uses                   (CONSTANT)     BNS_CUSTOM_PATH
-	 * @uses                   (CONSTANT)     BNS_CUSTOM_URL
-	 * @uses                   (CONSTANT)     BNSIA_PATH
-	 * @uses                   (CONSTANT)     BNSIA_URL
-	 * @uses                   BNS_Inline_Asides::plugin_data
-	 * @uses                   content_url
-	 * @uses                   wp_enqueue_script
-	 * @uses                   wp_enqueue_style
+	 * @uses    (CONSTANT)   BNS_CUSTOM_PATH
+	 * @uses    (CONSTANT)   BNS_CUSTOM_URL
+	 * @uses    (CONSTANT)   BNSIA_PATH
+	 * @uses    (CONSTANT)   BNSIA_URL
+	 * @uses    BNS_Inline_Asides::plugin_data
+	 * @uses    wp_enqueue_script
+	 * @uses    wp_enqueue_style
 	 *
-	 * @version                1.0
-	 * @date                   April 3, 2013
+	 * @version 1.0
+	 * @date    April 3, 2013
 	 * Adjusted path to scripts and styles files
 	 * Removed direct jQuery enqueue
 	 *
-	 * @version                1.0.3
-	 * @date                   December 28, 2013
+	 * @version 1.0.3
+	 * @date    December 28, 2013
 	 * Added functional option to put `bnsia-custom-types.css` in `/wp-content/` folder
 	 *
-	 * @version                1.1
-	 * @date                   May 4, 2014
+	 * @version 1.1
+	 * @date    May 4, 2014
 	 * Apply `plugin_data` method
 	 * Moved JavaScript enqueue to footer
 	 * Moved custom CSS folder location to `/wp-content/bns-customs/`
+	 *
+	 * @version 1.2
+	 * @date    November 3, 2014
+	 * Renamed from `BNSIA_Scripts_and_Styles` to `scripts_and_styles`
 	 */
-	function BNSIA_Scripts_and_Styles() {
+	function scripts_and_styles() {
 		/** @var object $bnsia_data - holds the plugin header data */
 		$bnsia_data = $this->plugin_data();
 
@@ -192,7 +194,6 @@ class BNS_Inline_Asides {
 		/** End if - is readable */
 
 	}
-
 	/** End function - scripts and styles */
 
 
@@ -297,7 +298,6 @@ class BNS_Inline_Asides {
 		return $return;
 
 	}
-
 	/** End function - shortcode */
 
 
@@ -332,7 +332,6 @@ class BNS_Inline_Asides {
 		return $new_text;
 
 	}
-
 	/** End function - replace spaces */
 
 
@@ -413,12 +412,14 @@ class BNS_Inline_Asides {
 	 * @return array
 	 */
 	function plugin_data() {
+
 		/** Call the wp-admin plugin code */
 		require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
 		/** @var $plugin_data - holds the plugin header data */
 		$plugin_data = get_plugin_data( __FILE__ );
 
 		return $plugin_data;
+
 	}
 	/** End function - plugin data */
 
