@@ -129,6 +129,7 @@ Please stay current with your WordPress installation, your active theme, and you
 == Changelog ==
 = 1.2 =
 * Released November 2014
+* Added sanity checks for `BNS_CUSTOM_*` define statements
 * Added `_x` i18n implementation to `show` and `hide` default messages
 * Replaced `BNS_Inline_Asides::replace_spaces` with `sanitize_html_class` functionality
 

@@ -83,6 +83,7 @@ class BNS_Inline_Asides {
 	 *
 	 * @version     1.2
 	 * @date        November 3, 2014
+	 * Added sanity checks for `BNS_CUSTOM_*` define statements
 	 * Corrections for textdomain to use plugin slug
 	 */
 	function __construct() {
@@ -102,8 +103,14 @@ class BNS_Inline_Asides {
 		define( 'BNSIA_PATH', plugin_dir_path( __FILE__ ) );
 
 		/** Define location for BNS plugin customizations */
-		define( 'BNS_CUSTOM_PATH', WP_CONTENT_DIR . '/bns-customs/' );
-		define( 'BNS_CUSTOM_URL', content_url( '/bns-customs/' ) );
+		if ( ! defined( 'BNS_CUSTOM_PATH' ) ) {
+			define( 'BNS_CUSTOM_PATH', WP_CONTENT_DIR . '/bns-customs/' );
+		}
+		/** End if - not defined */
+		if ( ! defined( 'BNS_CUSTOM_URL' ) ) {
+			define( 'BNS_CUSTOM_URL', content_url( '/bns-customs/' ) );
+		}
+		/** End if - not defined */
 
 		/** Enqueue Scripts and Styles */
 		add_action(
