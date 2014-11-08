@@ -12,10 +12,10 @@ This plugin will allow you to style sections of the post, or page, content with 
 
 == Description ==
 
-Have you ever wanted to add a personal comment into the body of a post or page and have it stand out from the rest of the content?
-Have you really wanted to throw a rant in a review because the subject just really got under your skin but you don't want to dramatically disrupt the content?
-This plugin will allow you to style sections of the post, or page, content with a shortcode that can add more emphasis by leveraging a style element from the active theme.
-These asides can be left open as part of the content flow; or these asides can be closed to leave your readers the option of opening them if they choose to.
+Have you ever wanted to add a personal comment into the body of a post or page and have it stand out from the rest of the content?<br />
+Have you really wanted to throw a rant in a review because the subject just really got under your skin but you don't want to dramatically disrupt the content?<br />
+This plugin will allow you to style sections of the post, or page, content with a shortcode that can add more emphasis by leveraging a style element from the active theme.<br />
+These asides can be left open as part of the content flow; or these asides can be closed to leave your readers the option of opening them if they choose to.<br />
 
 == Installation ==
 
@@ -55,6 +55,9 @@ The pre-defined aside types currently included:
 * Changelog - sets the font to monospace, reminiscent of type written notes
 * Footnote - uses lower-case roman numerals when the items are written using an (HTML) ordered list
 * Nota Bene (NB) - italicizes the text within the aside
+* Black text on a transparent background with a non-repeating hat graphic
+* Correction - Black text on a transparent background with a non-repeating checkbox graphic
+* Update - Black text on a transparent background with a non-repeating circular arrow graphic
 
 See the frequently asked questions section for how to add your own custom type.
 
@@ -133,6 +136,7 @@ Please stay current with your WordPress installation, your active theme, and you
 * Added `_x` i18n implementation to `show` and `hide` default messages
 * Replaced `BNS_Inline_Asides::replace_spaces` with `sanitize_html_class` functionality
 * Renamed `BNSIA_Scripts_and_Styles` to `scripts_and_styles`
+* Updated `readme.txt` to note additional default types of asides
 
 = 1.1 =
 * Released May 2014

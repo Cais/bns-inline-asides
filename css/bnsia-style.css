@@ -31,8 +31,12 @@
  * Added new aside type: Correction
  *
  * @version 1.0.2
- * @date August 2013
+ * @date	August 2013
  * Added new aside type: Update
+ *
+ * @version	1.2
+ * @date	November 2014
+ * Added better demarcation points between types
  */
 
 span.close-aside, span.open-aside {
@@ -57,8 +61,8 @@ blockquote.aside.closed {
 /** Remove any background image from blockquote if it exists */
 /** blockquote.aside { background-image: none; } */
 
-/** Pre-Defined BNS Inline Aside Types */
-/** Type: Note */
+/** Pre-Defined BNS Inline Aside Types -------------------------------------- */
+/** Type: Note -------------------------------------------------------------- */
 .open-aside.note {
 	background-color: #c0c0c0;
 }
@@ -69,7 +73,7 @@ blockquote.aside.note {
 	background-color: #c0c0c0;
 }
 
-/** Type: Rant */
+/** Type: Rant -------------------------------------------------------------- */
 .open-aside.rant {
 	background-color: #ff0000;
 	color: #000;
@@ -85,7 +89,7 @@ blockquote.aside.rant {
 	color: #000;
 }
 
-/** Type: Changelog */
+/** Type: Changelog --------------------------------------------------------- */
 .open-aside.changelog {
 	background-color: #c0c0c0;
 }
@@ -96,7 +100,7 @@ blockquote.aside.changelog {
 	font-family: monospace;
 }
 
-/** Type: Footnote */
+/** Type: Footnote ---------------------------------------------------------- */
 .open-aside.footnote {
 	background-color: #c0c0c0;
 }
@@ -111,7 +115,7 @@ blockquote.aside.footnote ol {
 	list-style-type: lower-roman;
 }
 
-/** Type: Nota Bene -or- NB */
+/** Type: Nota Bene -or- NB ------------------------------------------------- */
 .open-aside.nb, .open-aside.nota-bene {
 	background-color: #c0c0c0;
 }
@@ -122,7 +126,7 @@ blockquote.aside.nb, blockquote.aside.nota-bene {
 	font-style: italic;
 }
 
-/** Type: Hat Tip */
+/** Type: Hat Tip ----------------------------------------------------------- */
 .open-aside.hat-tip {
 }
 
@@ -136,7 +140,7 @@ blockquote.aside.hat-tip {
 	color: #000;
 }
 
-/** Type: Correction */
+/** Type: Correction -------------------------------------------------------- */
 .open-aside.correction {
 }
 
@@ -151,15 +155,15 @@ blockquote.aside.correction {
 	color: #000;
 }
 
-/** Type: Update */
+/** Type: Update ------------------------------------------------------------ */
 .open-aside.update {
 }
 
 .bnsia.aside.update,
 blockquote.aside.update {
 	/**
-	 * Black text on a transparent background with a non-repeating checkbox
-	 * graphic for added emphasis
+	 * Black text on a transparent background with a non-repeating circular
+	 * arrow graphic for added emphasis
 	 */
 	background: url('../images/update.png') no-repeat left transparent;
 	background-size: auto 100%;
