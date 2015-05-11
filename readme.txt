@@ -133,6 +133,7 @@ Please stay current with your WordPress installation, your active theme, and you
 = 1.3 =
 * Released May 2015
 * Added `BNS Inline Asides Update Message` function
+* Added i18n support
 * Updated copyright years
 * Minor code clean-up
 

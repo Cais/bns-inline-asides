@@ -4,7 +4,7 @@
  * @package     BNS_Inline_Asides
  * @since       0.9
  * @author      Edward Caissie <edward.caissie@gmail.com>
- * @copyright   Copyright (c) 2013-2014, Edward Caissie
+ * @copyright   Copyright (c) 2013-2015, Edward Caissie
  *
  * This file is part of BNS Inline Asides plugin
  *

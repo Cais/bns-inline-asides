@@ -108,6 +108,9 @@ class BNS_Inline_Asides {
 			define( 'BNS_CUSTOM_URL', content_url( '/bns-customs/' ) );
 		}
 
+		/** Added i18n support */
+		load_plugin_textdomain( 'bns-inline-asides' );
+
 		/** Enqueue Scripts and Styles */
 		add_action(
 			'wp_enqueue_scripts', array(
