@@ -3,7 +3,7 @@
 Plugin Name: BNS Inline Asides
 Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
 Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
-Version: 1.2
+Version: 1.3
 Text Domain: bns-inline-asides
 Author: Edward Caissie
 Author URI: http://edwardcaissie.com/
@@ -18,14 +18,14 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * emphasis by leveraging a style element from the active theme.
  *
  * @package        BNS_Inline_Asides
- * @version        1.2
+ * @version        1.3
  *
  * @link           http://buynowshop.com/plugins/bns-inline-asides/
  * @link           https://github.com/Cais/bns-inline-asides/
- * @link           http://wordpress.org/extend/plugins/bns-inline-asides/
+ * @link           https://wordpress.org/plugins/bns-inline-asides/
  *
  * @author         Edward Caissie <edward.caissie@gmail.com>
- * @copyright      Copyright (c) 2011-2014, Edward Caissie
+ * @copyright      Copyright (c) 2011-2015, Edward Caissie
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License version 2, as published by the
@@ -47,11 +47,8 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * The license for this software can also likely be found here:
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
- * @version        1.1
- * @date           May 2014
- *
- * @version        1.2
- * @date           November 2014
+ * @version        1.3
+ * @date           May 2015
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
@@ -69,6 +66,7 @@ class BNS_Inline_Asides {
 	 *
 	 * @uses        (CONSTANT)  WP_CONTENT_DIR
 	 * @uses        (GLOBAL)    $wp_version
+	 * @uses        __
 	 * @uses        add_action
 	 * @uses        add_shortcode
 	 * @uses        content_url
@@ -87,6 +85,7 @@ class BNS_Inline_Asides {
 	 * Corrections for textdomain to use plugin slug
 	 */
 	function __construct() {
+
 		/**
 		 * WordPress version compatibility
 		 * Check installed WordPress version for compatibility
@@ -96,7 +95,6 @@ class BNS_Inline_Asides {
 		if ( version_compare( $wp_version, "3.6", "<" ) ) {
 			exit ( $exit_message );
 		}
-		/** End if - version compare */
 
 		/** Define some constants to save some keying */
 		define( 'BNSIA_URL', plugin_dir_url( __FILE__ ) );
@@ -106,11 +104,9 @@ class BNS_Inline_Asides {
 		if ( ! defined( 'BNS_CUSTOM_PATH' ) ) {
 			define( 'BNS_CUSTOM_PATH', WP_CONTENT_DIR . '/bns-customs/' );
 		}
-		/** End if - not defined */
 		if ( ! defined( 'BNS_CUSTOM_URL' ) ) {
 			define( 'BNS_CUSTOM_URL', content_url( '/bns-customs/' ) );
 		}
-		/** End if - not defined */
 
 		/** Enqueue Scripts and Styles */
 		add_action(
@@ -132,7 +128,6 @@ class BNS_Inline_Asides {
 		add_shortcode( 'aside', array( $this, 'bns_inline_asides_shortcode' ) );
 
 	}
-	/** End function - constructor */
 
 
 	/**
@@ -171,6 +166,7 @@ class BNS_Inline_Asides {
 	 * Renamed from `BNSIA_Scripts_and_Styles` to `scripts_and_styles`
 	 */
 	function scripts_and_styles() {
+
 		/** @var object $bnsia_data - holds the plugin header data */
 		$bnsia_data = $this->plugin_data();
 
@@ -185,16 +181,13 @@ class BNS_Inline_Asides {
 		if ( is_readable( BNSIA_PATH . 'bnsia-custom-types.css' ) ) {
 			wp_enqueue_style( 'BNSIA-Custom-Types', BNSIA_URL . 'bnsia-custom-types.css', array(), $bnsia_data['Version'], 'screen' );
 		}
-		/** End if - is readable */
 
 		/** This location is recommended as upgrade safe */
 		if ( is_readable( BNS_CUSTOM_PATH . 'bnsia-custom-types.css' ) ) {
 			wp_enqueue_style( 'BNSIA-Custom-Types', BNS_CUSTOM_URL . 'bnsia-custom-types.css', array(), $bnsia_data['Version'], 'screen' );
 		}
-		/** End if - is readable */
 
 	}
-	/** End function - scripts and styles */
 
 
 	/**
@@ -240,6 +233,7 @@ class BNS_Inline_Asides {
 	 * Replaced `BNS_Inline_Asides::replace_spaces` with `sanitize_html_class` functionality
 	 */
 	function bns_inline_asides_shortcode( $atts, $content = null ) {
+
 		extract(
 			shortcode_atts(
 				array(
@@ -259,7 +253,6 @@ class BNS_Inline_Asides {
 		if ( $status != "open" ) {
 			$status = "closed";
 		}
-		/** End if - status is not open */
 
 		/**
 		 * @var string $type_class - leaves any end-user capitalization for aesthetics
@@ -273,7 +266,6 @@ class BNS_Inline_Asides {
 		} else {
 			$type_class = ' ' . $type_class;
 		}
-		/** End if - type class - aside */
 
 		/** @var $element - default is null|empty */
 		$element = sanitize_html_class( strtolower( $element ), '' );
@@ -290,7 +282,6 @@ class BNS_Inline_Asides {
 		} else {
 			$return = $toggle_markup . '<' . $this->bnsia_theme_element( $element ) . ' class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</' . $this->bnsia_theme_element( $element ) . '>';
 		}
-		/** End if - theme element - null */
 
 		/** Grab the element of choice and push it through the JavaScript */
 		wp_localize_script( 'bnsia_script', 'element', $this->bnsia_theme_element( $element ) );
@@ -298,11 +289,11 @@ class BNS_Inline_Asides {
 		return $return;
 
 	}
-	/** End function - shortcode */
 
 
 	/**
 	 * Replace Spaces
+	 *
 	 * Takes a string and replaces the spaces with a single hyphen by default
 	 *
 	 * @package     BNS_Inline_asides
@@ -320,6 +311,7 @@ class BNS_Inline_Asides {
 	 * Replaced with `sanitize_html_class` functionality
 	 */
 	function replace_spaces( $text, $replacement = '-' ) {
+
 		/** @var $new_text - initial text set to lower case */
 		$new_text = esc_attr( strtolower( $text ) );
 		/** replace whitespace with a single space */
@@ -332,11 +324,11 @@ class BNS_Inline_Asides {
 		return $new_text;
 
 	}
-	/** End function - replace spaces */
 
 
 	/**
 	 * BNSIA Theme Element
+	 *
 	 * Plugin currently supports the following HTML tags: aside, blockquote,
 	 * code, h1 through h6, pre, and q; or uses the default <div class = bnsia>
 	 *
@@ -386,22 +378,18 @@ class BNS_Inline_Asides {
 		 */
 		if ( empty( $element ) ) {
 			return '';
-
 		} elseif ( in_array( $element, $accepted_elements ) ) {
 			return $element;
-
 		} else {
 			return '';
-
 		}
-		/** End if - empty - element */
 
 	}
-	/** End function - theme element */
 
 
 	/**
 	 * Plugin Data
+	 *
 	 * Returns the plugin header data as an array
 	 *
 	 * @package    BNS_Inline_Asides
@@ -421,12 +409,9 @@ class BNS_Inline_Asides {
 		return $plugin_data;
 
 	}
-	/** End function - plugin data */
 
 
 }
-
-/** End class - inline asides */
 
 
 /** @var $bns_inline_asides - instantiate the class */
