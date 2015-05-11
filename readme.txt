@@ -134,6 +134,7 @@ Please stay current with your WordPress installation, your active theme, and you
 * Released May 2015
 * Added `BNS Inline Asides Update Message` function
 * Added i18n support
+* Added default and English (Canada) translation files
 * Updated copyright years
 * Minor code clean-up
 
