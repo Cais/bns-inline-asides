@@ -3,8 +3,8 @@ Contributors: cais
 Donate link: http://buynowshop.com
 Tags: posts, pages, content, shortcode, plugin-only
 Requires at least: 3.6
-Tested up to: 4.2.2
-Stable tag: 1.3
+Tested up to: 4.9
+Stable tag: 1.3.1
 License: GNU General Public License v2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -63,6 +63,9 @@ See the frequently asked questions section for how to add your own custom type.
 
 == Frequently Asked Questions ==
 
+= Are there any GDPR relevant concerns when using this plugin? =
+We are not aware of any concerns as they pertain to the GDPR.
+
 = Why doesn't the "Rant" type work with the "H" tags? =
 Not all possible combinations of existing BNS Inline Aside types have been set as defaults.
 Please feel free to add the bns-inline-asides-custom-stylesheet.css option and create your own combinations ...
@@ -99,7 +102,7 @@ Here are some examples:
 
 == Other Notes ==
 
-= Copyright 2011-2015  Edward Caissie  (email : edward.caissie@gmail.com) =
+= Copyright 2011-2018  Edward Caissie  (email : edward.caissie@gmail.com) =
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License version 2,
@@ -130,6 +133,10 @@ Sample content taken from the "Readability" post of the Theme Unit Test data fou
 Please stay current with your WordPress installation, your active theme, and your plugins.
 
 == Changelog ==
+= 1.3.1 =
+* Released July 2018
+* Minor updates to text strings, copyright dates, and variable designation
+
 = 1.3 =
 * Released May 2015
 * Added `BNS Inline Asides Update Message` function

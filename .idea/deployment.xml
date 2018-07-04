@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData">
+    <serverData>
+      <paths name="Auctions4Paws">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../../.." web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="BNS">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../../.." web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="BrianCollinson.ca">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../../.." web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="ByCais - Main">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../../.." web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="EAC">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../../.." web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="NGGTest">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../../.." web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="NGGeCom">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../../.." web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="OP">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../../.." web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="WPFA">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$/../../.." web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

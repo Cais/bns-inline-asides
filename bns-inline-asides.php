@@ -3,7 +3,7 @@
 Plugin Name: BNS Inline Asides
 Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
 Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
-Version: 1.3
+Version: 1.3.1
 Text Domain: bns-inline-asides
 Author: Edward Caissie
 Author URI: http://edwardcaissie.com/
@@ -18,14 +18,14 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * emphasis by leveraging a style element from the active theme.
  *
  * @package        BNS_Inline_Asides
- * @version        1.3
+ * @version        1.3.1
  *
  * @link           http://buynowshop.com/plugins/bns-inline-asides/
  * @link           https://github.com/Cais/bns-inline-asides/
  * @link           https://wordpress.org/plugins/bns-inline-asides/
  *
  * @author         Edward Caissie <edward.caissie@gmail.com>
- * @copyright      Copyright (c) 2011-2015, Edward Caissie
+ * @copyright      Copyright (c) 2011-2018, Edward Caissie
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU General Public License version 2, as published by the
@@ -47,8 +47,8 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * The license for this software can also likely be found here:
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
- * @version        1.3
- * @date           May 2015
+ * @version        1.3.1
+ * @date           July 2018
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
@@ -83,6 +83,10 @@ class BNS_Inline_Asides {
 	 * @date        November 3, 2014
 	 * Added sanity checks for `BNS_CUSTOM_*` define statements
 	 * Corrections for textdomain to use plugin slug
+	 *
+	 * @version     1.3.1
+	 * @date        July 4, 2018
+	 * Correct text message to be displayed.
 	 */
 	function __construct() {
 
@@ -91,7 +95,7 @@ class BNS_Inline_Asides {
 		 * Check installed WordPress version for compatibility
 		 */
 		global $wp_version;
-		$exit_message = __( 'BNS Early Adopter requires WordPress version 3.6 or newer. <a href="http://codex.wordpress.org/Upgrading_WordPress">Please Update!</a>', 'bns-inline-asides' );
+		$exit_message = __( 'BNS Inline Asides requires WordPress version 3.6 or newer. <a href="http://codex.wordpress.org/Upgrading_WordPress">Please Update!</a>', 'bns-inline-asides' );
 		if ( version_compare( $wp_version, "3.6", "<" ) ) {
 			exit ( $exit_message );
 		}
@@ -340,10 +344,10 @@ class BNS_Inline_Asides {
 	 *
 	 * @param    (global) $element - string taken from shortcode $atts( 'element' )
 	 *
+	 * @return array - accepted HTML tag | empty
+	 *
 	 * @internal The HTML `p` tag is not recommended at this time (version 0.8),
 	 * especially for text that spans multiple paragraphs
-	 *
-	 * @return  string - accepted HTML tag | empty
 	 *
 	 * @version  0.6.1
 	 * @date     November 22, 2011
@@ -357,8 +361,15 @@ class BNS_Inline_Asides {
 	 * @version  1.0
 	 * @date     Rat Day, 2013
 	 * Use an array of elements rather than a convoluted if statement
+	 *
+	 * @version  1.3.1
+	 * @date     July 4, 2018
+	 * Adjust $element to be used and returned as an array
 	 */
 	function bnsia_theme_element( $element ) {
+
+		/** force $element into an array */
+		$element = str_split( $element, 0 );
 
 		/** @var $accepted_elements - array of block level container elements */
 		$accepted_elements = array(
@@ -380,11 +391,11 @@ class BNS_Inline_Asides {
 		 * check if the element is accepted or return nothing if it is not.
 		 */
 		if ( empty( $element ) ) {
-			return '';
+			return null;
 		} elseif ( in_array( $element, $accepted_elements ) ) {
 			return $element;
 		} else {
-			return '';
+			return null;
 		}
 
 	}
@@ -496,7 +507,7 @@ function bnsia_in_plugin_update_message( $args ) {
 						}
 						/** End if - unordered list not started */
 
-						$line = preg_replace( '~^\s*\*\s*~', '', htmlspecialchars( $line ) );
+						$line         = preg_replace( '~^\s*\*\s*~', '', htmlspecialchars( $line ) );
 						$return_value .= '<li style=" ' . ( $index % 2 == 0 ? 'clear: left;' : '' ) . '">' . $line . '</li>';
 
 					} else {
@@ -504,7 +515,7 @@ function bnsia_in_plugin_update_message( $args ) {
 						if ( $ul ) {
 							$return_value = '</ul><div style="clear: left;"></div>';
 							$return_value .= '<p>' . $line . '</p>';
-							$ul = false;
+							$ul           = false;
 						} else {
 							$return_value .= '<p>' . $line . '</p>';
 						}
