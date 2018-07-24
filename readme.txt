@@ -4,7 +4,7 @@ Donate link: http://buynowshop.com
 Tags: posts, pages, content, shortcode, plugin-only
 Requires at least: 3.6
 Tested up to: 4.9
-Stable tag: 1.3.1
+Stable tag: 1.3.2
 License: GNU General Public License v2
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -133,6 +133,10 @@ Sample content taken from the "Readability" post of the Theme Unit Test data fou
 Please stay current with your WordPress installation, your active theme, and your plugins.
 
 == Changelog ==
+= 1.3.2 =
+* Released July 2018
+* Set return value as string (and remove forcing $element to array).
+
 = 1.3.1 =
 * Released July 2018
 * Minor updates to text strings, copyright dates, and variable designation

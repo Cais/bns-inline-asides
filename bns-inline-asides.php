@@ -3,7 +3,7 @@
 Plugin Name: BNS Inline Asides
 Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
 Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
-Version: 1.3.1
+Version: 1.3.2
 Text Domain: bns-inline-asides
 Author: Edward Caissie
 Author URI: http://edwardcaissie.com/
@@ -18,7 +18,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * emphasis by leveraging a style element from the active theme.
  *
  * @package        BNS_Inline_Asides
- * @version        1.3.1
+ * @version        1.3.2
  *
  * @link           http://buynowshop.com/plugins/bns-inline-asides/
  * @link           https://github.com/Cais/bns-inline-asides/
@@ -47,7 +47,7 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  * The license for this software can also likely be found here:
  * http://www.gnu.org/licenses/gpl-2.0.html
  *
- * @version        1.3.1
+ * @version        1.3.2
  * @date           July 2018
  */
 
@@ -342,9 +342,9 @@ class BNS_Inline_Asides {
 	 * @package  BNS_Inline_Asides
 	 * @since    0.6
 	 *
-	 * @param    (global) $element - string taken from shortcode $atts( 'element' )
+	 * @param    string $element taken from shortcode $atts( 'element' ).
 	 *
-	 * @return array - accepted HTML tag | empty
+	 * @return string accepted HTML tag | empty
 	 *
 	 * @internal The HTML `p` tag is not recommended at this time (version 0.8),
 	 * especially for text that spans multiple paragraphs
@@ -365,13 +365,14 @@ class BNS_Inline_Asides {
 	 * @version  1.3.1
 	 * @date     July 4, 2018
 	 * Adjust $element to be used and returned as an array
+	 *
+	 * @version 1.3.2
+	 * @date    July 24, 2018
+	 * Set return value as string (and remove forcing $element to array).
 	 */
-	function bnsia_theme_element( $element ) {
+	protected function bnsia_theme_element( $element ) {
 
-		/** force $element into an array */
-		$element = str_split( $element, 0 );
-
-		/** @var $accepted_elements - array of block level container elements */
+		// @var array $accepted_elements block level container elements.
 		$accepted_elements = array(
 			'aside',
 			'blockquote',
@@ -383,7 +384,7 @@ class BNS_Inline_Asides {
 			'h5',
 			'h6',
 			'pre',
-			'q'
+			'q',
 		);
 
 		/**
@@ -392,7 +393,7 @@ class BNS_Inline_Asides {
 		 */
 		if ( empty( $element ) ) {
 			return null;
-		} elseif ( in_array( $element, $accepted_elements ) ) {
+		} elseif ( in_array( $element, $accepted_elements, true ) ) {
 			return $element;
 		} else {
 			return null;
