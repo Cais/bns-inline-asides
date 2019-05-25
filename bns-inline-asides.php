@@ -1,15 +1,17 @@
 <?php
 /**
-Plugin Name: BNS Inline Asides
-Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
-Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
-Version: 1.4
-Text Domain: bns-inline-asides
-Author: Edward Caissie
-Author URI: http://edwardcaissie.com/
-License: GNU General Public License v2
-License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-*/
+ * Plugin Name: BNS Inline Asides
+ * Plugin URI: http://buynowshop.com/plugins/bns-inline-asides/
+ * Description: This plugin will allow you to style sections of post content with added emphasis by leveraging a style element from the active theme.
+ * Version: 1.4
+ * Text Domain: bns-inline-asides
+ * Author: Edward Caissie
+ * Author URI: http://edwardcaissie.com/
+ * License: GNU General Public License v2
+ * License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ *
+ * @package BNS_Inline_Asides
+ */
 
 /**
  * BNS Inline Asides
@@ -46,7 +48,6 @@ License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
  *
  * The license for this software can also likely be found here:
  * http://www.gnu.org/licenses/gpl-2.0.html
- *
  */
 
 /** Credits for jQuery assistance: Trevor Mills www.topquarkproductions.ca */
@@ -95,7 +96,7 @@ class BNS_Inline_Asides {
 		global $wp_version;
 		$exit_message = __( 'BNS Inline Asides requires WordPress version 3.6 or newer. <a href="http://codex.wordpress.org/Upgrading_WordPress">Please Update!</a>', 'bns-inline-asides' );
 		if ( version_compare( $wp_version, '3.6', '<' ) ) {
-			exit( $exit_message );
+			exit( esc_html( $exit_message ) );
 		}
 
 		/** Define some constants to save some keying */
@@ -200,20 +201,20 @@ class BNS_Inline_Asides {
 	/**
 	 * BNS Inline Asides Shortcode
 	 *
-	 * @package    BNS_Inline_Asides
-	 * @since      0.1
-	 *
 	 * @param array $atts    shortcode attributes.
 	 * @param null  $content the content.
 	 *
+	 * @return  string
+	 *
+	 * @package    BNS_Inline_Asides
+	 * @since      0.1
+	 *
 	 * @uses       BNS_Inline_Asides::bnsia_theme_element
-	 * @uses       _x
+	 * @uses       __
 	 * @uses       do_shortcode
 	 * @uses       sanitize_html_class
 	 * @uses       shortcode_atts
 	 * @uses       wp_localize_script
-	 *
-	 * @return  string
 	 *
 	 * @version    0.9
 	 * @date       January 4, 2013
@@ -241,29 +242,27 @@ class BNS_Inline_Asides {
 	 */
 	public function bns_inline_asides_shortcode( $atts, $content = null ) {
 
-		extract(
-			shortcode_atts(
-				array(
-					'type'    => 'Aside',
-					'element' => '',
-					/* translators: %s is a PHP replacement variable */
-					'show'    => __( 'To see the <em>%s</em> click here.', 'bns-inline-asides' ),
-					/* translators: %s is a PHP replacement variable */
-					'hide'    => __( 'To hide the <em>%s</em> click here.', 'bns-inline-asides' ),
-					'status'  => 'open',
-				),
-				$atts,
-				'aside'
-			)
+		$args = shortcode_atts(
+			array(
+				'type'    => 'Aside',
+				'element' => '',
+				/* translators: %s is a PHP replacement variable */
+				'show'    => __( 'To see the <em>%s</em> click here.', 'bns-inline-asides' ),
+				/* translators: %s is a PHP replacement variable */
+				'hide'    => __( 'To hide the <em>%s</em> click here.', 'bns-inline-asides' ),
+				'status'  => 'open',
+			),
+			$atts,
+			'aside'
 		);
 
 		/** Clean up shortcode properties. */
-		$status = esc_attr( strtolower( $atts['status'] ) );
+		$status = esc_attr( strtolower( $args['status'] ) );
 		if ( 'open' !== $status ) {
 			$status = 'closed';
 		}
 
-		$type_class = sanitize_html_class( strtolower( $atts['type'] ), 'aside' );
+		$type_class = sanitize_html_class( strtolower( $args['type'] ), 'aside' );
 
 		/** No need to duplicate the default 'aside' class. */
 		if ( 'aside' === $type_class ) {
@@ -275,7 +274,7 @@ class BNS_Inline_Asides {
 		$element = sanitize_html_class( strtolower( $atts['element'] ), '' );
 
 		// The secret sauce ...
-		$toggle_markup = '<div class="aside-toggler ' . $status . '"><span class="open-aside' . $type_class . '">' . sprintf( __( $atts['show'] ), esc_attr( $atts['type'] ) ) . '</span><span class="close-aside' . $type_class . '">' . sprintf( __( $atts['hide'] ), esc_attr( $atts['type'] ) ) . '</span></div>';
+		$toggle_markup = '<div class="aside-toggler ' . $status . '"><span class="open-aside' . $type_class . '">' . sprintf( __( $args['show'] ), esc_attr( $args['type'] ) ) . '</span><span class="close-aside' . $type_class . '">' . sprintf( __( $args['hide'] ), esc_attr( $args['type'] ) ) . '</span></div>';
 		if ( $this->bnsia_theme_element( $element ) === '' ) {
 			$return = $toggle_markup . '<div class="bnsia aside' . $type_class . ' ' . $status . '">' . do_shortcode( $content ) . '</div>';
 		} else {
@@ -295,15 +294,15 @@ class BNS_Inline_Asides {
 	 *
 	 * Takes a string and replaces the spaces with a single hyphen by default
 	 *
+	 * @param string $text        string to be cleaned.
+	 * @param string $replacement character to be used.
+	 *
+	 * @return  string - class
+	 *
 	 * @package     BNS_Inline_asides
 	 * @since       0.8
 	 *
 	 * @internal    Original code from Opus Primus by Edward "Cais" Caissie ( mailto:edward.caissie@gmail.com )
-	 *
-	 * @param   string $text string to be cleaned.
-	 * @param   string $replacement character to be used.
-	 *
-	 * @return  string - class
 	 *
 	 * @deprecated  1.2
 	 * @date        November 3, 2014
@@ -331,12 +330,12 @@ class BNS_Inline_Asides {
 	 * Plugin currently supports the following HTML tags: aside, blockquote,
 	 * code, h1 through h6, pre, and q; or uses the default <div class = bnsia>
 	 *
-	 * @package  BNS_Inline_Asides
-	 * @since    0.6
-	 *
-	 * @param    string $element taken from shortcode $atts( 'element' ).
+	 * @param string $element taken from shortcode $atts( 'element' ).
 	 *
 	 * @return string accepted HTML tag | empty
+	 *
+	 * @package  BNS_Inline_Asides
+	 * @since    0.6
 	 *
 	 * @internal The HTML `p` tag is not recommended at this time (version 0.8),
 	 * especially for text that spans multiple paragraphs
@@ -358,8 +357,8 @@ class BNS_Inline_Asides {
 	 * @date     July 4, 2018
 	 * Adjust $element to be used and returned as an array
 	 *
-	 * @version 1.3.2
-	 * @date    July 24, 2018
+	 * @version  1.3.2
+	 * @date     July 24, 2018
 	 * Set return value as string (and remove forcing $element to array).
 	 */
 	protected function bnsia_theme_element( $element ) {
@@ -399,12 +398,12 @@ class BNS_Inline_Asides {
 	 *
 	 * Returns the plugin header data as an array
 	 *
-	 * @package    BNS_Inline_Asides
+	 * @return array
 	 * @since      1.1
 	 *
 	 * @uses       get_plugin_data
 	 *
-	 * @return array
+	 * @package    BNS_Inline_Asides
 	 */
 	public function plugin_data() {
 
