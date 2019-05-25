@@ -138,6 +138,7 @@ Please stay current with your WordPress installation, your active theme, and you
 * Released ...
 * Removed update message code ... seems a bit bloat-ish.
 * General code formatting and clean-up
+* Translators: removed existing `pomo` files and added new `.pot` file
 
 = 1.3.2 =
 * Released July 2018

@@ -1,0 +1,61 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: BNS Inline Asides\n"
+"POT-Creation-Date: 2019-05-25 13:56-0400\n"
+"PO-Revision-Date: 2019-05-25 13:55-0400\n"
+"Last-Translator: Edward Caissie <edward.caissie@gmail.com>\n"
+"Language-Team: Edward Caissie <edward.caissie@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-WPHeader: bns-inline-asides.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: bns-inline-asides.php:97
+msgid ""
+"BNS Inline Asides requires WordPress version 3.6 or newer. <a href=\"http://"
+"codex.wordpress.org/Upgrading_WordPress\">Please Update!</a>"
+msgstr ""
+
+#. translators: %s is a PHP replacement variable
+#: bns-inline-asides.php:250
+#, php-format
+msgid "To see the <em>%s</em> click here."
+msgstr ""
+
+#. translators: %s is a PHP replacement variable
+#: bns-inline-asides.php:252
+#, php-format
+msgid "To hide the <em>%s</em> click here."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "BNS Inline Asides"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://buynowshop.com/plugins/bns-inline-asides/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"This plugin will allow you to style sections of post content with added "
+"emphasis by leveraging a style element from the active theme."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Edward Caissie"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://edwardcaissie.com/"
+msgstr ""
